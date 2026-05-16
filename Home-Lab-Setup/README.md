@@ -62,25 +62,25 @@ ping 192.168.56.10
 
 ## Kali Linux IP Configuration
 
-![Kali IP](lab-screenshots/kali-ip.png)
+![Kali Linux IP](lab-screenshots/kali-linux-ip-config.png)
 
 ---
 
 ## Successful Ping Test
 
-![Ping Test](lab-screenshots/ping-test.png)
+![Ping Test](lab-screenshots/successful-ping-test.png)
 
 ---
 
 ## VirtualBox Internal Network Settings
 
-![Internal Network](lab-screenshots/internal-network.png)
+![Internal Network](lab-screenshots/virtualbox-internal-network-settings.png)
 
 ---
 
 ## Metasploitable IP Configuration
 
-![Metasploitable IP](lab-screenshots/metasploitable-ip.png)
+![Metasploitable IP](lab-screenshots/metasploitable-ip-config.png)
 
 ---
 
