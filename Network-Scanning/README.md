@@ -68,20 +68,19 @@ sudo nmap -O 192.168.56.10
 
 ## Basic Nmap Scan
 
-(Add screenshot here)
+![Basic Nmap Scan](nmap-screenshots/basic-nmap-scan.png)
 
 ---
 
 ## Service Version Detection
 
-(Add screenshot here)
+![Service Version Detection](nmap-screenshots/service-version-detection.png)
 
 ---
 
 ## OS Detection Scan
 
-(Add screenshot here)
-
+![OS Detection](nmap-screenshots/os-detection-scan.png)
 ---
 
 # Key Learnings
