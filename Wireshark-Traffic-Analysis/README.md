@@ -71,20 +71,19 @@ Analyzed TCP SYN, SYN-ACK, and ACK packets during TCP communication.
 
 ## ICMP Packet Capture
 
-(Add screenshot here)
+![ICMP Analysis](wireshark-screenshots/icmp-packet-analysis.png)
 
 ---
 
 ## ARP Traffic Analysis
 
-(Add screenshot here)
+![ARP Analysis](wireshark-screenshots/arp-traffic-analysis.png)
 
 ---
 
 ## TCP Handshake Analysis
 
-(Add screenshot here)
-
+![TCP Handshake](wireshark-screenshots/tcp-handshake-analysis.png)
 ---
 
 # Key Learnings
