@@ -1,108 +1,51 @@
 # Cybersecurity Home Lab Setup
 
 ## Objective
-Built an isolated cybersecurity home lab using VirtualBox for penetration testing, networking practice, packet analysis, and SOC learning.
+
+Built an isolated cybersecurity home lab using VirtualBox and Wazuh SIEM for penetration testing, network analysis, endpoint monitoring, threat hunting, and SOC analyst practice.
 
 ---
 
-# Lab Environment
+## Lab Infrastructure
 
 | Machine | Role | IP Address |
-|----------|------|------------|
+|----------|----------|----------|
 | Kali Linux | Attacker Machine | 192.168.56.20 |
 | Metasploitable 2 | Vulnerable Target | 192.168.56.10 |
-| Ubuntu | Linux Practice Machine | 192.168.56.30 |
-| Windows 11 | SOC/Windows Analysis | 192.168.56.40 |
+| Ubuntu Desktop | Linux Endpoint | 192.168.56.30 |
+| Windows 11 | Windows Endpoint | 192.168.56.40 |
+| Wazuh Server | SIEM & Log Management | 192.168.56.50 |
 
 ---
 
-# Technologies Used
+## Technologies Used
 
 - VirtualBox
 - Kali Linux
 - Metasploitable 2
-- Ubuntu
-- Windows 11
-- Internal Networking
-- ICMP
-- Linux Networking Commands
-
----
-
-# Network Configuration
-
-All virtual machines were configured using Internal Network mode inside VirtualBox to safely isolate the lab environment from the internet.
-
----
-
-# Connectivity Verification
-
-Connectivity between machines was verified using ICMP ping tests.
-
-Example:
-
-```bash
-ping 192.168.56.10
-```
-
----
-
-# Skills Practiced
-
-- Virtualization
-- VM Configuration
-- Internal Networking
-- Linux Administration
-- Basic Troubleshooting
-- Network Connectivity Testing
-
----
-
-# Screenshots# Cybersecurity Home Lab Setup
-
-## Objective
-
-Built an isolated cybersecurity home lab using VirtualBox for penetration testing, networking practice, packet analysis, and SOC learning.
-
----
-
-# Lab Environment
-
-| Machine | Role | IP Address |
-|----------|------|------------|
-| Kali Linux | Attacker Machine | 192.168.56.20 |
-| Metasploitable 2 | Vulnerable Target | 192.168.56.10 |
-| Ubuntu | Linux Practice Machine | 192.168.56.30 |
-| Windows 11 | SOC/Windows Analysis | 192.168.56.40 |
-| Wazuh Server | SIEM Platform | 192.168.56.50 |
-
----
-
-# Technologies Used
-
-- VirtualBox
-- Kali Linux
-- Metasploitable 2
-- Ubuntu
+- Ubuntu Linux
 - Windows 11
 - Wazuh SIEM
-- Internal Networking
-- ICMP
-- Linux Networking Commands
-- Endpoint Monitoring
+- Sysmon
+- Nmap
+- Wireshark
+- TCP/IP Networking
+- Internal Network Architecture
 - Threat Hunting
+- Endpoint Monitoring
+- Security Event Analysis
 
 ---
 
-# Network Configuration
+## Network Architecture
 
-All virtual machines were configured using Internal Network mode inside VirtualBox to safely isolate the lab environment from the internet.
+All virtual machines are connected through an isolated VirtualBox Internal Network to safely perform offensive and defensive cybersecurity exercises without exposing the environment to external systems.
 
 ---
 
-# Connectivity Verification
+## Connectivity Verification
 
-Connectivity between machines was verified using ICMP ping tests.
+Network communication between lab systems was verified using ICMP ping testing.
 
 Example:
 
@@ -112,19 +55,19 @@ ping 192.168.56.10
 
 ---
 
-# Skills Practiced
+## Skills Practiced
 
-- Virtualization
-- VM Configuration
-- Internal Networking
+- Virtual Machine Deployment
+- Network Configuration
+- Internal Network Design
 - Linux Administration
 - Windows Administration
-- Basic Troubleshooting
-- Network Connectivity Testing
+- Troubleshooting
 - Endpoint Monitoring
-- Security Event Analysis
 - Threat Hunting
-- SOC Investigation
+- Security Event Investigation
+- SOC Operations
+- Log Analysis
 
 ---
 
@@ -148,7 +91,7 @@ ping 192.168.56.10
 
 ---
 
-## Metasploitable IP Configuration
+## Metasploitable 2 IP Configuration
 
 ![Metasploitable IP](lab-screenshots/metasploitable-ip-config.png)
 
@@ -158,30 +101,30 @@ ping 192.168.56.10
 
 ## Objective
 
-Integrated Wazuh SIEM into the cybersecurity home lab to monitor endpoints, collect security logs, perform threat hunting, and investigate security events.
+Integrated Wazuh SIEM into the home lab to collect endpoint logs, monitor security events, investigate alerts, and perform threat hunting activities.
 
 ---
 
 ## Wazuh Architecture
 
-| Component | IP Address | Role |
+| Component | IP Address | Purpose |
 |------------|------------|------------|
-| Wazuh Server | 192.168.56.50 | SIEM Server |
-| Ubuntu Agent | 192.168.56.30 | Linux Endpoint Monitoring |
-| Windows 11 Agent | 192.168.56.40 | Windows Endpoint Monitoring |
+| Wazuh Server | 192.168.56.50 | Centralized SIEM Platform |
+| Ubuntu Agent | 192.168.56.30 | Linux Log Monitoring |
+| Windows Agent | 192.168.56.40 | Windows Security Monitoring |
 
 ---
 
 ## Features Implemented
 
+- Agent Deployment
 - Endpoint Monitoring
-- Agent Management
-- Security Event Collection
 - Threat Hunting
-- Log Analysis
 - Alert Investigation
-- File Integrity Monitoring
+- Security Event Collection
 - Configuration Assessment
+- File Integrity Monitoring
+- Log Management
 
 ---
 
@@ -211,56 +154,46 @@ Integrated Wazuh SIEM into the cybersecurity home lab to monitor endpoints, coll
 
 ---
 
+## Alert Investigation Summary
+
+| Field | Value |
+|---------|---------|
+| Agent | Ubuntu |
+| Source User | admin |
+| Target User | root |
+| Command Executed | /usr/bin/su |
+| Detection Source | sudo Logs |
+| Event Type | Privilege Escalation Activity |
+
+### Analyst Notes
+
+The event shows the user "admin" successfully executing a sudo command to switch to the root account. Wazuh successfully collected, parsed, and displayed the event for investigation. Such activities should be reviewed in production environments to ensure authorization and compliance.
+
+---
+
 ## Key Learnings
 
-- Built a centralized SIEM platform using Wazuh
-- Connected and monitored Linux and Windows endpoints
-- Investigated security alerts and events
+- Built and maintained a centralized SIEM environment
+- Connected Linux and Windows endpoints to Wazuh
+- Investigated real security alerts and events
 - Performed threat hunting using collected logs
 - Practiced SOC analyst investigation workflows
-- Analyzed authentication and system activity logs
-- Gained hands-on experience with endpoint monitoring
+- Analyzed authentication and endpoint activity logs
+- Gained hands-on experience with endpoint security monitoring
 
 ---
 
-# Future Improvements
+## Future Enhancements
 
-- Add Sysmon monitoring on Windows
 - Simulate brute-force attacks from Kali Linux
-- Generate and investigate security alerts
-- Map alerts to MITRE ATT&CK techniques
-- Integrate additional endpoints
+- Investigate attack activity through Wazuh alerts
+- Expand File Integrity Monitoring use cases
+- Perform MITRE ATT&CK mapping
 - Create incident response playbooks
-
-
-## Kali Linux IP Configuration
-
-![Kali Linux IP](lab-screenshots/kali-linux-ip-config.png)
+- Add additional monitored endpoints
 
 ---
 
-## Successful Ping Test
+## Project Outcome
 
-![Ping Test](lab-screenshots/successful-ping-test.png)
-
----
-
-## VirtualBox Internal Network Settings
-
-![Internal Network](lab-screenshots/virtualbox-internal-network-settings.png)
-
----
-
-## Metasploitable IP Configuration
-
-![Metasploitable IP](lab-screenshots/metasploitable-ip-config.png)
-
----
-
-# Future Improvements
-
-- Perform Nmap scanning
-- Practice Wireshark packet analysis
-- Add vulnerability scanning
-- Build SOC investigation projects
-- Analyze Linux and Windows logs
+Successfully designed and deployed a multi-machine cybersecurity lab capable of supporting penetration testing, packet analysis, threat hunting, security monitoring, and SOC analyst training using Wazuh SIEM.
