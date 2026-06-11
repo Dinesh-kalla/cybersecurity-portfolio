@@ -8,32 +8,33 @@ Built an isolated cybersecurity home lab using VirtualBox and Wazuh SIEM for pen
 
 ## Lab Infrastructure
 
-| Machine | Role | IP Address |
-|----------|----------|----------|
-| Kali Linux | Attacker Machine | 192.168.56.20 |
-| Metasploitable 2 | Vulnerable Target | 192.168.56.10 |
-| Ubuntu Desktop | Linux Endpoint | 192.168.56.30 |
-| Windows 11 | Windows Endpoint | 192.168.56.40 |
-| Wazuh Server | SIEM & Log Management | 192.168.56.50 |
+| Machine          | Role                  | IP Address    |
+| ---------------- | --------------------- | ------------- |
+| Kali Linux       | Attacker Machine      | 192.168.56.20 |
+| Metasploitable 2 | Vulnerable Target     | 192.168.56.10 |
+| Ubuntu Desktop   | Linux Endpoint        | 192.168.56.30 |
+| Windows 11       | Windows Endpoint      | 192.168.56.40 |
+| Wazuh Server     | SIEM & Log Management | 192.168.56.50 |
 
 ---
 
 ## Technologies Used
 
-- VirtualBox
-- Kali Linux
-- Metasploitable 2
-- Ubuntu Linux
-- Windows 11
-- Wazuh SIEM
-- Sysmon
-- Nmap
-- Wireshark
-- TCP/IP Networking
-- Internal Network Architecture
-- Threat Hunting
-- Endpoint Monitoring
-- Security Event Analysis
+* VirtualBox
+* Kali Linux
+* Metasploitable 2
+* Ubuntu Linux
+* Windows 11
+* Wazuh SIEM
+* Wazuh Agents
+* Sysmon
+* Nmap
+* Wireshark
+* TCP/IP Networking
+* Internal Network Architecture
+* Threat Hunting
+* Endpoint Monitoring
+* Security Event Analysis
 
 ---
 
@@ -57,17 +58,20 @@ ping 192.168.56.10
 
 ## Skills Practiced
 
-- Virtual Machine Deployment
-- Network Configuration
-- Internal Network Design
-- Linux Administration
-- Windows Administration
-- Troubleshooting
-- Endpoint Monitoring
-- Threat Hunting
-- Security Event Investigation
-- SOC Operations
-- Log Analysis
+* Virtual Machine Deployment
+* Network Configuration
+* Internal Network Design
+* Linux Administration
+* Windows Administration
+* Troubleshooting
+* Endpoint Monitoring
+* Security Monitoring
+* Threat Hunting
+* Security Event Investigation
+* Alert Triage
+* SIEM Administration
+* SOC Operations
+* Log Analysis
 
 ---
 
@@ -107,24 +111,25 @@ Integrated Wazuh SIEM into the home lab to collect endpoint logs, monitor securi
 
 ## Wazuh Architecture
 
-| Component | IP Address | Purpose |
-|------------|------------|------------|
-| Wazuh Server | 192.168.56.50 | Centralized SIEM Platform |
-| Ubuntu Agent | 192.168.56.30 | Linux Log Monitoring |
+| Component     | IP Address    | Purpose                     |
+| ------------- | ------------- | --------------------------- |
+| Wazuh Server  | 192.168.56.50 | Centralized SIEM Platform   |
+| Ubuntu Agent  | 192.168.56.30 | Linux Log Monitoring        |
 | Windows Agent | 192.168.56.40 | Windows Security Monitoring |
 
 ---
 
 ## Features Implemented
 
-- Agent Deployment
-- Endpoint Monitoring
-- Threat Hunting
-- Alert Investigation
-- Security Event Collection
-- Configuration Assessment
-- File Integrity Monitoring
-- Log Management
+* Agent Deployment
+* Endpoint Monitoring
+* Security Monitoring
+* Threat Hunting
+* Alert Investigation
+* Security Event Collection
+* Configuration Assessment
+* File Integrity Monitoring
+* Log Management
 
 ---
 
@@ -156,14 +161,14 @@ Integrated Wazuh SIEM into the home lab to collect endpoint logs, monitor securi
 
 ## Alert Investigation Summary
 
-| Field | Value |
-|---------|---------|
-| Agent | Ubuntu |
-| Source User | admin |
-| Target User | root |
-| Command Executed | /usr/bin/su |
-| Detection Source | sudo Logs |
-| Event Type | Privilege Escalation Activity |
+| Field            | Value                         |
+| ---------------- | ----------------------------- |
+| Agent            | Ubuntu                        |
+| Source User      | admin                         |
+| Target User      | root                          |
+| Command Executed | /usr/bin/su                   |
+| Detection Source | sudo Logs                     |
+| Event Type       | Privilege Escalation Activity |
 
 ### Analyst Notes
 
@@ -173,27 +178,44 @@ The event shows the user "admin" successfully executing a sudo command to switch
 
 ## Key Learnings
 
-- Built and maintained a centralized SIEM environment
-- Connected Linux and Windows endpoints to Wazuh
-- Investigated real security alerts and events
-- Performed threat hunting using collected logs
-- Practiced SOC analyst investigation workflows
-- Analyzed authentication and endpoint activity logs
-- Gained hands-on experience with endpoint security monitoring
+* Built and maintained a centralized SIEM environment
+* Connected Linux and Windows endpoints to Wazuh
+* Investigated real security alerts and events
+* Performed threat hunting using collected logs
+* Practiced SOC analyst investigation workflows
+* Analyzed authentication and endpoint activity logs
+* Gained hands-on experience with endpoint security monitoring
 
 ---
 
 ## Future Enhancements
 
-- Simulate brute-force attacks from Kali Linux
-- Investigate attack activity through Wazuh alerts
-- Expand File Integrity Monitoring use cases
-- Perform MITRE ATT&CK mapping
-- Create incident response playbooks
-- Add additional monitored endpoints
+* Simulate SSH brute-force attacks from Kali Linux
+* Investigate attack activity through Wazuh alerts
+* Perform MITRE ATT&CK technique mapping
+* Create incident response playbooks
+* Deploy additional monitored endpoints
+* Implement Wazuh Active Response
+
+---
+
+## Portfolio Relevance
+
+This project demonstrates practical experience with:
+
+* Cybersecurity Lab Design
+* Network Segmentation
+* Endpoint Monitoring
+* SIEM Administration
+* Threat Hunting
+* Alert Investigation
+* Security Event Analysis
+* SOC Analyst Workflows
+
+The lab serves as a foundation for future incident response, threat detection, and security monitoring projects.
 
 ---
 
 ## Project Outcome
 
-Successfully designed and deployed a multi-machine cybersecurity lab capable of supporting penetration testing, packet analysis, threat hunting, security monitoring, and SOC analyst training using Wazuh SIEM.
+Successfully designed and deployed a multi-machine cybersecurity home lab consisting of Kali Linux, Metasploitable 2, Ubuntu, Windows 11, and Wazuh SIEM. The environment supports penetration testing, network analysis, endpoint monitoring, threat hunting, alert investigation, and SOC analyst training in a safe isolated network.
