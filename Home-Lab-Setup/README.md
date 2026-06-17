@@ -1,10 +1,30 @@
-# Cybersecurity Home Lab Setup
+# 🛡️ Cybersecurity Portfolio
 
-## Objective
+![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-blue)
+![Kali Linux](https://img.shields.io/badge/Kali-Linux-557C94)
+![Sysmon](https://img.shields.io/badge/Sysmon-Windows-green)
+![Nmap](https://img.shields.io/badge/Nmap-Network%20Scanning-orange)
+![Wireshark](https://img.shields.io/badge/Wireshark-Traffic%20Analysis-blue)
+![VirtualBox](https://img.shields.io/badge/VirtualBox-Lab-purple)
 
-Built an isolated cybersecurity home lab using VirtualBox and Wazuh SIEM for penetration testing, network analysis, endpoint monitoring, threat hunting, and SOC analyst practice.
+## Overview
+
+This repository showcases my hands-on cybersecurity projects and practical SOC Analyst learning. It includes a cybersecurity home lab, Wazuh SIEM deployment, network scanning, Wireshark traffic analysis, threat hunting, and security event investigations using industry-standard tools.
 
 ---
+
+## 📂 Repository Contents
+
+* 🏠 Home Lab Setup
+* 🛡️ Wazuh SIEM Integration
+* 🌐 Network Scanning
+* 📡 Wireshark Traffic Analysis
+* 🔍 Security Event Investigation
+* 🚀 Future Enhancements
+
+---
+
+# 🏠 Home Lab Setup
 
 ## Lab Infrastructure
 
@@ -40,7 +60,7 @@ Built an isolated cybersecurity home lab using VirtualBox and Wazuh SIEM for pen
 
 ## Network Architecture
 
-All virtual machines are connected through an isolated VirtualBox Internal Network to safely perform offensive and defensive cybersecurity exercises without exposing the environment to external systems.
+All virtual machines are connected through an isolated VirtualBox Internal Network, allowing offensive and defensive cybersecurity exercises to be performed safely without exposing the environment to external networks.
 
 ---
 
@@ -48,7 +68,7 @@ All virtual machines are connected through an isolated VirtualBox Internal Netwo
 
 Network communication between lab systems was verified using ICMP ping testing.
 
-Example:
+**Example:**
 
 ```bash
 ping 192.168.56.10
@@ -75,7 +95,7 @@ ping 192.168.56.10
 
 ---
 
-# Screenshots
+# 📸 Screenshots
 
 ## Kali Linux IP Configuration
 
@@ -101,11 +121,11 @@ ping 192.168.56.10
 
 ---
 
-# Wazuh SIEM Integration
+# 🛡️ Wazuh SIEM Integration
 
-## Objective
+## Overview
 
-Integrated Wazuh SIEM into the home lab to collect endpoint logs, monitor security events, investigate alerts, and perform threat hunting activities.
+Integrated Wazuh SIEM into the home lab to centralize log collection, monitor endpoint activity, investigate security events, and perform threat hunting across Windows and Linux systems.
 
 ---
 
@@ -133,27 +153,27 @@ Integrated Wazuh SIEM into the home lab to collect endpoint logs, monitor securi
 
 ---
 
-## Wazuh Screenshots
+# 📊 Wazuh Screenshots
 
-### Wazuh SIEM Overview
+## Wazuh SIEM Overview
 
 ![Wazuh SIEM Overview](lab-screenshots/wazuh/wazuh-siem-overview.png)
 
 ---
 
-### Active Endpoint Monitoring
+## Active Endpoint Monitoring
 
 ![Active Endpoint Monitoring](lab-screenshots/wazuh/active-endpoint-monitoring.png)
 
 ---
 
-### Threat Hunting & Event Analysis
+## Threat Hunting & Event Analysis
 
 ![Threat Hunting](lab-screenshots/wazuh/threat-hunting-event-analysis.png)
 
 ---
 
-### Wazuh Alert Investigation
+## Wazuh Alert Investigation
 
 ![Alert Investigation](lab-screenshots/wazuh/wazuh-alert-investigation.png)
 
@@ -172,50 +192,50 @@ Integrated Wazuh SIEM into the home lab to collect endpoint logs, monitor securi
 
 ### Analyst Notes
 
-The event shows the user "admin" successfully executing a sudo command to switch to the root account. Wazuh successfully collected, parsed, and displayed the event for investigation. Such activities should be reviewed in production environments to ensure authorization and compliance.
+The event shows the user **admin** successfully executing a **sudo** command to switch to the **root** account. Wazuh collected, parsed, and displayed the event for investigation. Activities involving privilege escalation should always be reviewed in production environments to verify authorization and ensure compliance with security policies.
 
 ---
 
 ## Key Learnings
 
-* Built and maintained a centralized SIEM environment
-* Connected Linux and Windows endpoints to Wazuh
-* Investigated real security alerts and events
-* Performed threat hunting using collected logs
-* Practiced SOC analyst investigation workflows
-* Analyzed authentication and endpoint activity logs
-* Gained hands-on experience with endpoint security monitoring
+* Built and maintained a centralized SIEM environment.
+* Connected Windows and Linux endpoints to Wazuh.
+* Investigated real security alerts and endpoint events.
+* Performed threat hunting using collected telemetry.
+* Practiced SOC Analyst investigation workflows.
+* Analyzed authentication and endpoint activity logs.
+* Gained hands-on experience with endpoint security monitoring.
 
 ---
 
 ## Future Enhancements
 
-* Simulate SSH brute-force attacks from Kali Linux
-* Investigate attack activity through Wazuh alerts
-* Perform MITRE ATT&CK technique mapping
-* Create incident response playbooks
-* Deploy additional monitored endpoints
-* Implement Wazuh Active Response
+* Simulate SSH brute-force attacks from Kali Linux.
+* Investigate attack activity using Wazuh alerts.
+* Map detections to the MITRE ATT&CK framework.
+* Develop incident response playbooks.
+* Deploy additional monitored endpoints.
+* Configure and test Wazuh Active Response.
 
 ---
 
 ## Portfolio Relevance
 
-This project demonstrates practical experience with:
+This project demonstrates practical experience in:
 
 * Cybersecurity Lab Design
 * Network Segmentation
-* Endpoint Monitoring
 * SIEM Administration
+* Endpoint Monitoring
 * Threat Hunting
 * Alert Investigation
 * Security Event Analysis
 * SOC Analyst Workflows
 
-The lab serves as a foundation for future incident response, threat detection, and security monitoring projects.
+This home lab serves as the foundation for future detection engineering, incident response, malware analysis, and threat hunting projects.
 
 ---
 
 ## Project Outcome
 
-Successfully designed and deployed a multi-machine cybersecurity home lab consisting of Kali Linux, Metasploitable 2, Ubuntu, Windows 11, and Wazuh SIEM. The environment supports penetration testing, network analysis, endpoint monitoring, threat hunting, alert investigation, and SOC analyst training in a safe isolated network.
+Successfully designed and deployed a multi-machine cybersecurity home lab consisting of Kali Linux, Metasploitable 2, Ubuntu Desktop, Windows 11, and Wazuh SIEM. The environment supports penetration testing, network analysis, endpoint monitoring, threat hunting, security event investigation, and practical SOC Analyst training within a safe and isolated network.
