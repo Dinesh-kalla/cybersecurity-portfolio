@@ -1,23 +1,57 @@
-# 🛡️ SOC Investigation Case Studies
+# 🛡️ SOC Investigations
 
-This section contains documented security investigation case studies performed in my cybersecurity home lab using Wazuh SIEM. Each investigation follows a structured SOC analyst workflow from alert detection to final analysis and documentation.
+This section contains hands-on Security Operations Center (SOC) investigations completed within my cybersecurity home lab using Wazuh SIEM, Sysmon, and Linux security logs.
 
+Each investigation follows a structured workflow including:
 
-Each investigation follows a structured SOC analyst workflow:
+- Alert validation
+- Event analysis
+- Threat hunting
+- Evidence collection
+- MITRE ATT&CK mapping
+- Analyst assessment
+- Recommendations
+- Documentation
 
-1. Alert Detection
-2. Investigation
-3. Evidence Collection
-4. Log Analysis
-5. MITRE ATT&CK Mapping
-6. Findings
-7. Lessons Learned
+---
 
-## Investigations
+## Investigation Portfolio
 
-| Investigation | Status |
-|--------------|--------|
-| SSH Authentication Failure Investigation | 🚧 In Progress |
-| Nmap Detection | ⏳ Planned |
-| Windows Process Investigation | ⏳ Planned |
-| Linux Authentication Analysis | ⏳ Planned |
+| Investigation | Platform | Detection | Status |
+|---------------|----------|-----------|--------|
+| 🔐 SSH Authentication Failure Investigation | Ubuntu | Multiple failed SSH logins followed by successful authentication | ✅ Completed |
+| 🖥️ Windows Process Investigation | Windows 11 | Sysmon Process Creation (whoami /priv) | ✅ Completed |
+| 🔑 Linux Privilege Escalation Investigation | Ubuntu | Successful sudo to ROOT | ✅ Completed |
+| 🌐 Linux Listening Ports Monitoring | Ubuntu | Netstat listening ports status changed | ✅ Completed |
+
+---
+
+## Skills Demonstrated
+
+- Security Event Investigation
+- Threat Hunting
+- Wazuh SIEM
+- Sysmon
+- Linux Security Monitoring
+- Windows Security Monitoring
+- Authentication Analysis
+- Process Creation Analysis
+- Privilege Escalation Analysis
+- Network Service Monitoring
+- MITRE ATT&CK Mapping
+- Incident Documentation
+
+---
+
+## Tools Used
+
+- Wazuh SIEM
+- Sysmon
+- Ubuntu Linux
+- Windows 11
+- Kali Linux
+- VirtualBox
+
+---
+
+More investigations will be added as my SOC home lab continues to expand.
