@@ -75,6 +75,7 @@ cybersecurity-portfolio
     ├── Windows Process Investigation
     ├── Linux Privilege Escalation Investigation
     ├── Linux Listening Ports Monitoring
+    ├── Linux User Account Creation Investigation
     └── README.md
 ```
 
@@ -88,6 +89,7 @@ cybersecurity-portfolio
 | 🖥️ Windows Process Investigation | Windows 11 | Sysmon Process Creation (`whoami /priv`) |
 | 🔑 Linux Privilege Escalation Investigation | Ubuntu Linux | Successful `sudo` privilege escalation |
 | 🌐 Linux Listening Ports Monitoring | Ubuntu Linux | Monitoring changes to listening network ports |
+| 👤 Linux User Account Creation Investigation | Ubuntu Linux | New local user/group creation via `useradd` (MITRE T1136.001) |
 
 ---
 
@@ -171,13 +173,13 @@ cybersecurity-portfolio
 - Windows Process Investigation
 - Linux Privilege Escalation Investigation
 - Linux Listening Ports Monitoring
+- Linux User Account Creation Investigation
 - Wireshark Traffic Analysis
 - Network Scanning
 
 ## 🚧 In Progress
 
 - Windows Failed Logon Investigation
-- Linux User Management Investigation
 - File Integrity Monitoring (FIM)
 - Nmap Detection Investigation
 - Windows PowerShell Investigation
