@@ -1,15 +1,22 @@
-
 # Lab 02 – ARP Spoofing Investigation (Man-in-the-Middle)
 
 ## Executive Summary
 
-This investigation demonstrates how an ARP Spoofing attack can manipulate a victim's ARP cache and redirect network traffic through an attacker's system. Using my isolated cybersecurity home lab, I established a normal network baseline, executed a controlled ARP Spoofing attack, captured the malicious traffic using Wireshark, analyzed the impact on the victim's ARP cache, and verified successful recovery after stopping the attack.
+This investigation demonstrates how an Address Resolution Protocol (ARP) Spoofing attack can manipulate a victim's ARP cache and redirect network traffic through an attacker's system.
+
+The attack was performed inside an isolated VirtualBox home lab using Kali Linux as the attacker, Windows 11 as the victim, and Metasploitable 2 as the target system. Wireshark was used to capture and analyze ARP traffic before, during, and after the attack.
+
+The investigation concludes with successful recovery by stopping the attack, clearing the ARP cache, and verifying that legitimate IP-to-MAC mappings were restored.
 
 ---
 
 # Scenario
 
-During a network investigation, suspicious ARP traffic was detected between hosts on the local network. The objective was to determine whether an attacker was performing an ARP Spoofing attack, analyze its impact, and validate system recovery.
+Users reported unusual network behavior during communication between Windows and a local server.
+
+Initial packet captures showed abnormal ARP traffic and duplicate IP address warnings.
+
+As the SOC Analyst, the objective was to determine whether an ARP Spoofing attack was occurring, collect evidence, analyze the impact, and verify successful recovery.
 
 ---
 
@@ -17,23 +24,25 @@ During a network investigation, suspicious ARP traffic was detected between host
 
 - Understand normal ARP communication
 - Investigate ARP cache behavior
-- Perform an ARP Spoofing attack in a controlled lab
-- Capture malicious ARP traffic using Wireshark
+- Perform an ARP Spoofing attack in a controlled environment
+- Capture malicious traffic using Wireshark
 - Analyze changes in the victim's ARP cache
-- Verify recovery after the attack
-- Document the investigation
+- Verify recovery after stopping the attack
+- Document the complete investigation
 
 ---
 
 # Lab Environment
 
 | Machine | Role | IP Address |
-|---------|------|------------|
+|----------|------|------------|
 | Kali Linux | Attacker | 192.168.56.20 |
 | Windows 11 | Victim | 192.168.56.40 |
 | Metasploitable 2 | Target | 192.168.56.10 |
 
-### Tools Used
+---
+
+# Tools Used
 
 - Kali Linux
 - Windows 11
@@ -44,18 +53,28 @@ During a network investigation, suspicious ARP traffic was detected between host
 
 ---
 
+# Attack Overview
+
+During the attack, Kali Linux continuously transmitted forged ARP Reply packets to both Windows and Metasploitable.
+
+Windows accepted the forged ARP Replies and replaced the legitimate MAC address of the target system with Kali's MAC address.
+
+As a result, traffic intended for Metasploitable was redirected through the attacker's machine.
+
+---
+
 # Investigation Workflow
 
 ```text
 Establish Baseline
         ↓
-Verify Communication
+Verify Network Connectivity
         ↓
 Enable IP Forwarding
         ↓
 Launch ARP Spoofing
         ↓
-Capture Network Traffic
+Capture Traffic
         ↓
 Analyze ARP Cache
         ↓
@@ -64,7 +83,15 @@ Verify Recovery
 
 ---
 
-# Attack Commands
+# Commands Used
+
+## Verify Connectivity
+
+```bash
+ping 192.168.56.10
+```
+
+---
 
 ## Enable IP Forwarding
 
@@ -72,11 +99,15 @@ Verify Recovery
 sudo sysctl -w net.ipv4.ip_forward=1
 ```
 
+---
+
 ## Poison Windows ARP Cache
 
 ```bash
 sudo arpspoof -i eth1 -t 192.168.56.40 192.168.56.10
 ```
+
+---
 
 ## Poison Metasploitable ARP Cache
 
@@ -90,45 +121,55 @@ sudo arpspoof -i eth1 -t 192.168.56.10 192.168.56.40
 
 ## Phase 1 – Baseline
 
-Before launching the attack, the ARP tables on Windows, Kali Linux, and Metasploitable contained legitimate IP-to-MAC mappings.
+Before the attack, all systems contained legitimate ARP entries.
+
+The Windows system correctly associated the Metasploitable IP address with its legitimate MAC address.
 
 ### Evidence
 
 ### Windows ARP Cache
 
-![Windows ARP Before](screenshots/01-windows-arp-before.png)
+![Windows](screenshots/01-windows-arp-before.png)
+
+---
 
 ### Metasploitable ARP Cache
 
-![Metasploitable ARP Before](screenshots/02-metasploitable-arp-before.png)
-
-### Kali ARP Cache
-
-![Kali ARP Before](screenshots/03-kali-arp-before.png)
+![Metasploitable](screenshots/02-metasploitable-arp-before.png)
 
 ---
 
-## Phase 2 – Attack Execution
+### Kali Linux ARP Cache
 
-The attacker continuously transmitted forged ARP Reply packets to both Windows and Metasploitable, poisoning their ARP caches.
+![Kali](screenshots/03-kali-arp-before.png)
+
+---
+
+# Phase 2 – Attack Execution
+
+The attacker launched ARP Spoofing against both Windows and Metasploitable.
+
+Forged ARP Reply packets were continuously transmitted to poison both ARP caches.
 
 ### Evidence
 
-#### ARP Spoof Command (Windows Target)
+#### Windows Target
 
-![ARP Spoof 1](screenshots/04-arpspoof-command-1.png)
-
-#### ARP Spoof Command (Metasploitable Target)
-
-![ARP Spoof 2](screenshots/05-arpspoof-command-2.png)
+![ARP Spoof Windows](screenshots/04-arpspoof-command-1.png)
 
 ---
 
-## Phase 3 – Packet Analysis
+#### Metasploitable Target
 
-Wireshark captured repeated forged ARP Reply packets generated by the attacker.
+![ARP Spoof Metasploitable](screenshots/05-arpspoof-command-2.png)
 
-During the attack, Wireshark also detected duplicate IP address warnings, indicating conflicting IP-to-MAC advertisements on the network.
+---
+
+# Phase 3 – Wireshark Analysis
+
+Wireshark captured repeated forged ARP Reply packets generated by Kali Linux.
+
+Duplicate IP address warnings were also observed, indicating conflicting IP-to-MAC advertisements on the local network.
 
 ### Evidence
 
@@ -136,31 +177,35 @@ During the attack, Wireshark also detected duplicate IP address warnings, indica
 
 ![ARP Replies](screenshots/06-arp-replies.png)
 
+---
+
 #### Duplicate IP Warning
 
-![Duplicate IP Warning](screenshots/07-duplicate-ip-warning.png)
+![Duplicate IP](screenshots/07-duplicate-ip-warning.png)
 
 ---
 
-## Phase 4 – ARP Cache Poisoning
+# Phase 4 – ARP Cache Poisoning
 
-During the attack, the Windows ARP cache incorrectly mapped the IP address of the Metasploitable system to the attacker's MAC address.
+During the attack, Windows replaced the legitimate MAC address associated with the Metasploitable IP address with Kali's MAC address.
 
-As a result, traffic intended for the target system was redirected to Kali Linux.
+This successfully redirected traffic through the attacker.
 
 ### Evidence
 
-![Poisoned ARP Cache](screenshots/08-poisoned-arp-cache.png)
+![Poisoned Cache](screenshots/08-poisoned-arp-cache.png)
 
 ---
 
-## Phase 5 – Recovery
+# Phase 5 – Recovery
 
-After stopping the ARP Spoofing attack, clearing the ARP cache, and generating new traffic, Windows relearned the legitimate MAC address and normal communication was restored.
+After stopping the attack, the Windows ARP cache was cleared.
+
+When communication resumed, Windows learned the legitimate MAC address again and normal communication was restored.
 
 ### Evidence
 
-![Recovered ARP Cache](screenshots/09-recovered-arp-cache.png)
+![Recovered Cache](screenshots/09-recovered-arp-cache.png)
 
 ---
 
@@ -178,9 +223,11 @@ After stopping the ARP Spoofing attack, clearing the ARP cache, and generating n
 
 ARP does not authenticate ARP Reply packets.
 
-The attacker exploited this weakness by sending forged ARP Replies, causing the victim to replace legitimate IP-to-MAC mappings with the attacker's MAC address.
+The attacker exploited this weakness by sending forged ARP Reply messages to both systems.
 
-This redirected network traffic through the attacker's system, enabling a Man-in-the-Middle (MITM) attack.
+The victim trusted these replies and updated its ARP cache with the attacker's MAC address.
+
+This redirected network traffic through Kali Linux, creating the conditions for a Man-in-the-Middle attack.
 
 ---
 
@@ -193,6 +240,18 @@ This redirected network traffic through the attacker's system, enabling a Man-in
 
 ---
 
+# Analyst Conclusion
+
+The investigation confirmed a successful ARP Spoofing attack against the Windows endpoint.
+
+Evidence collected from Wireshark demonstrated repeated forged ARP Reply packets and duplicate IP address warnings.
+
+Analysis of the victim's ARP cache confirmed that the legitimate IP-to-MAC mapping for the target system had been replaced by the attacker's MAC address.
+
+After stopping the attack and clearing the ARP cache, the legitimate ARP entries were restored, confirming successful recovery.
+
+---
+
 # Skills Practiced
 
 - ARP Protocol Analysis
@@ -201,48 +260,58 @@ This redirected network traffic through the attacker's system, enabling a Man-in
 - ARP Spoofing
 - Man-in-the-Middle (MITM)
 - Network Troubleshooting
+- Packet Capture Analysis
+- Root Cause Analysis
 - Incident Investigation
 - Evidence Collection
-- Root Cause Analysis
 
 ---
 
 # MITRE ATT&CK
 
 | Tactic | Technique |
-|---------|-----------|
+|----------|-----------|
 | Credential Access | T1557 – Adversary-in-the-Middle |
 
 ---
 
 # Evidence
 
-The complete packet capture used during this investigation is available in the **evidence** folder.
-
-```text
-evidence/
-└── arp-spoofing.pcapng
 ```
+evidence/
+├── arp-spoofing.pcapng
+└── README.md
+```
+
+The packet capture contains:
+
+- ARP Requests
+- Forged ARP Replies
+- Duplicate IP detection
+- Poisoned ARP traffic
+- Recovery traffic
 
 ---
 
 # Key Takeaways
 
-- ARP operates without authentication.
+- ARP does not authenticate replies.
 - ARP Spoofing manipulates IP-to-MAC mappings.
-- Wireshark can identify duplicate IP warnings and suspicious ARP activity.
-- ARP cache poisoning can redirect traffic through an attacker.
-- Clearing the ARP cache restores legitimate communication after the attack ends.
+- Wireshark can identify repeated forged ARP Replies.
+- Duplicate IP warnings may indicate ARP Spoofing.
+- ARP cache poisoning redirects traffic through an attacker.
+- Clearing the ARP cache restores legitimate communication.
 
 ---
 
 # Lessons Learned
 
 - Established a normal network baseline before performing the attack.
-- Verified ARP cache changes before, during, and after the attack.
-- Observed repeated forged ARP Reply packets using Wireshark.
+- Compared ARP cache entries before, during, and after the attack.
+- Observed forged ARP Reply packets in Wireshark.
+- Verified successful ARP cache poisoning.
 - Understood the importance of IP forwarding during a MITM attack.
-- Successfully restored the network to a normal state after the investigation.
+- Successfully restored the network after stopping the attack.
 
 ---
 
@@ -251,10 +320,38 @@ evidence/
 1. What is ARP Spoofing?
 2. Why is ARP vulnerable to spoofing?
 3. How does ARP Spoofing enable a Man-in-the-Middle attack?
-4. What indicators suggest an ARP Spoofing attack?
-5. Why was IP forwarding enabled on the attacker's system?
-6. How can organizations detect and mitigate ARP Spoofing?
-7. What changes occurred in the victim's ARP cache during the attack?
+4. Why was IP forwarding enabled on the attacker's system?
+5. What indicators suggest an ARP Spoofing attack?
+6. How can ARP Spoofing be detected?
+7. How can organizations mitigate ARP Spoofing?
+8. What changes occurred in the Windows ARP cache during the attack?
+9. Why did the ARP cache recover after clearing it?
+10. What evidence confirmed that the attack was successful?
+
+---
+
+## Repository Structure
+
+```
+Lab-02-ARP-Spoofing-Investigation/
+│
+├── README.md
+│
+├── screenshots/
+│   ├── 01-windows-arp-before.png
+│   ├── 02-metasploitable-arp-before.png
+│   ├── 03-kali-arp-before.png
+│   ├── 04-arpspoof-command-1.png
+│   ├── 05-arpspoof-command-2.png
+│   ├── 06-arp-replies.png
+│   ├── 07-duplicate-ip-warning.png
+│   ├── 08-poisoned-arp-cache.png
+│   └── 09-recovered-arp-cache.png
+│
+└── evidence/
+    ├── arp-spoofing.pcapng
+    └── README.md
+```
 
 ---
 
@@ -262,4 +359,6 @@ evidence/
 
 **Dinesh Babu**
 
-Cybersecurity Home Lab Series
+Cybersecurity Home Lab Portfolio
+
+Hands-on Cybersecurity | Network Analysis | SOC Investigations | Blue Team Learning
