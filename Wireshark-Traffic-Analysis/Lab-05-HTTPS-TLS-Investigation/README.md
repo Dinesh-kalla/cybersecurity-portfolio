@@ -155,8 +155,6 @@ Only metadata from the TLS handshake remains visible.
 
 # Evidence
 
-## Packet Capture
-
 - HTTPS.pcapng
 
 - `Evidence/HTTPS.pcapng`
