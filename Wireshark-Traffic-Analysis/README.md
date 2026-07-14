@@ -41,6 +41,7 @@ The purpose of these labs is to develop practical packet analysis skills by obse
 - Windows 11
 - Metasploitable 2
 - VirtualBox
+- Mozilla Firefox
 
 ---
 
@@ -51,9 +52,9 @@ The purpose of these labs is to develop practical packet analysis skills by obse
 | ICMP | Network connectivity testing | ✅ |
 | ARP | IP to MAC address resolution | ✅ |
 | TCP | Reliable communication | ✅ |
-| DNS | Domain name resolution | 🚧 |
-| HTTP | Web traffic analysis | 🚧 |
-| HTTPS | Secure web traffic analysis | 🚧 |
+| DNS | Domain name resolution | ✅ |
+| HTTP | Web traffic analysis | ✅ |
+| HTTPS/TLS | Secure web traffic analysis | ✅ |
 | DHCP | Automatic IP configuration | 🚧 |
 
 ---
@@ -140,19 +141,85 @@ Performed a controlled ARP Spoofing attack, analyzed forged ARP packets, investi
 
 ---
 
+## ✅ Lab 03 – DNS Investigation
+
+### Objective
+
+Captured and analyzed DNS traffic to understand how domain names are resolved into IP addresses, examining DNS query and response packets in detail.
+
+### Topics Covered
+
+- DNS Query/Response Analysis
+- UDP Protocol Analysis
+- Transaction ID Correlation
+- DNS Resource Records (A Records)
+- DNS TTL and Caching
+- Packet Inspection
+
+📂 **Lab Folder**
+
+[Lab-03-DNS-Investigation](Lab-03-DNS-Investigation)
+
+---
+
+## ✅ Lab 04 – HTTP Investigation
+
+### Objective
+
+Captured and analyzed HTTP traffic to understand how browsers communicate with web servers, investigating requests, responses, headers, and full TCP stream reconstruction.
+
+### Topics Covered
+
+- HTTP Request/Response Analysis
+- HTTP Header Inspection
+- TCP Stream Reconstruction
+- Plaintext Traffic Risk (SOC Perspective)
+- Web Traffic Investigation
+
+📂 **Lab Folder**
+
+[Lab-04-HTTP-Investigation](Lab-04-HTTP-Investigation)
+
+---
+
+## ✅ Lab 05 – HTTPS/TLS Investigation
+
+### Objective
+
+Analyzed HTTPS traffic and the TLS handshake process to understand what metadata remains visible even when application data is encrypted.
+
+### Topics Covered
+
+- TLS Handshake Analysis (Client Hello / Server Hello)
+- Server Name Indication (SNI)
+- Certificate Inspection and Validation
+- Cipher Suite Identification
+- TLS Version Analysis
+- Encrypted Traffic Investigation (SOC Perspective)
+
+📂 **Lab Folder**
+
+[Lab-05-HTTPS-TLS-Investigation](Lab-05-HTTPS-TLS-Investigation)
+
+---
+
 # Skills Matrix
 
-| Skill | Lab 01 | Lab 02 |
-|--------|:------:|:------:|
-| Wireshark | ✅ | ✅ |
-| ICMP Analysis | ✅ | |
-| ARP Analysis | ✅ | ✅ |
-| TCP Analysis | ✅ | |
-| Packet Filtering | ✅ | ✅ |
-| Packet Capture | ✅ | ✅ |
-| Incident Investigation | | ✅ |
-| Root Cause Analysis | | ✅ |
-| MITM Concepts | | ✅ |
+| Skill | Lab 01 | Lab 02 | Lab 03 | Lab 04 | Lab 05 |
+|--------|:------:|:------:|:------:|:------:|:------:|
+| Wireshark | ✅ | ✅ | ✅ | ✅ | ✅ |
+| ICMP Analysis | ✅ | | | | |
+| ARP Analysis | ✅ | ✅ | | | |
+| TCP Analysis | ✅ | | | ✅ | |
+| DNS Analysis | | | ✅ | | |
+| HTTP Analysis | | | | ✅ | |
+| TLS/HTTPS Analysis | | | | | ✅ |
+| Packet Filtering | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Packet Capture | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Incident Investigation | | ✅ | | | |
+| Root Cause Analysis | | ✅ | | | |
+| MITM Concepts | | ✅ | | | |
+| Certificate Validation | | | | | ✅ |
 
 ---
 
@@ -164,6 +231,9 @@ Performed a controlled ARP Spoofing attack, analyzed forged ARP packets, investi
 - ICMP
 - ARP
 - TCP
+- DNS
+- HTTP
+- TLS/HTTPS
 
 ## Packet Analysis
 
@@ -171,6 +241,7 @@ Performed a controlled ARP Spoofing attack, analyzed forged ARP packets, investi
 - Packet Filtering
 - Protocol Analysis
 - Traffic Investigation
+- TCP Stream Reconstruction
 
 ## Cybersecurity
 
@@ -180,6 +251,8 @@ Performed a controlled ARP Spoofing attack, analyzed forged ARP packets, investi
 - Incident Analysis
 - Root Cause Analysis
 - Evidence Collection
+- Certificate Validation
+- Encrypted Traffic Analysis
 
 ---
 
@@ -196,6 +269,7 @@ The labs focus on:
 - Collecting forensic evidence
 - Investigating attack techniques
 - Validating recovery after security incidents
+- Analyzing encrypted traffic metadata
 
 ---
 
@@ -238,10 +312,7 @@ Document Results
 
 # Upcoming Labs
 
-- DNS Investigation
 - DHCP Analysis
-- HTTP Analysis
-- HTTPS & TLS Analysis
 - FTP Traffic Analysis
 - SSH Packet Analysis
 - SMB Analysis
