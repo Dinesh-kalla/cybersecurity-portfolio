@@ -23,6 +23,7 @@ Each investigation follows a structured workflow including:
 | 🖥️ Windows Process Investigation | Windows 11 | Sysmon Process Creation (whoami /priv) | ✅ Completed |
 | 🔑 Linux Privilege Escalation Investigation | Ubuntu | Successful sudo to ROOT | ✅ Completed |
 | 🌐 Linux Listening Ports Monitoring | Ubuntu | Netstat listening ports status changed | ✅ Completed |
+| 👤 Linux User Account Creation Investigation | Ubuntu | New local user/group creation via `useradd` (MITRE T1136.001) | ✅ Completed |
 
 ---
 
@@ -38,6 +39,7 @@ Each investigation follows a structured workflow including:
 - Process Creation Analysis
 - Privilege Escalation Analysis
 - Network Service Monitoring
+- User/Group Account Monitoring
 - MITRE ATT&CK Mapping
 - Incident Documentation
 
