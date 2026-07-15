@@ -71,11 +71,12 @@ cybersecurity-portfolio
 ├── Wireshark-Traffic-Analysis
 │
 └── SOC-Investigations
-    ├── SSH Authentication Failure Investigation
     ├── Windows Process Investigation
+    ├── SSH Authentication Failure Investigation
     ├── Linux Privilege Escalation Investigation
-    ├── Linux Listening Ports Monitoring
     ├── Linux User Account Creation Investigation
+    ├── Linux Listening Ports Investigation
+    ├── Nmap SSH Service Detection Investigation
     └── README.md
 ```
 
@@ -90,6 +91,7 @@ cybersecurity-portfolio
 | 🔑 Linux Privilege Escalation Investigation | Ubuntu Linux | Successful `sudo` privilege escalation |
 | 🌐 Linux Listening Ports Monitoring | Ubuntu Linux | Monitoring changes to listening network ports |
 | 👤 Linux User Account Creation Investigation | Ubuntu Linux | New local user/group creation via `useradd` (MITRE T1136.001) |
+| 🔎 Nmap SSH Service Detection Investigation | Ubuntu Linux | Custom Wazuh rule detecting Nmap SSH service scans (MITRE T1595, T1046) |
 
 ---
 
@@ -153,6 +155,7 @@ cybersecurity-portfolio
 - Authentication Analysis
 - Process Creation Analysis
 - Privilege Escalation Analysis
+- Detection Engineering & Custom Rule Development
 - Network Traffic Analysis
 - Log Analysis
 - Event Correlation
@@ -174,6 +177,7 @@ cybersecurity-portfolio
 - Linux Privilege Escalation Investigation
 - Linux Listening Ports Monitoring
 - Linux User Account Creation Investigation
+- Nmap SSH Service Detection Investigation (Custom Wazuh Rule)
 - Wireshark Traffic Analysis
 - Network Scanning
 
@@ -181,7 +185,6 @@ cybersecurity-portfolio
 
 - Windows Failed Logon Investigation
 - File Integrity Monitoring (FIM)
-- Nmap Detection Investigation
 - Windows PowerShell Investigation
 - Advanced Threat Hunting
 - Incident Response Scenarios

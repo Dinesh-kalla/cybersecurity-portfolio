@@ -117,7 +117,7 @@ The investigation confirmed that the privilege escalation originated from the lo
 
 ### 2. Wazuh Threat Hunting Events
 
-![Threat Hunting](screenshots/02-threat-hunting-events.png)
+![Threat Hunting](screenshots/02-threat-hunting.png)
 
 ---
 

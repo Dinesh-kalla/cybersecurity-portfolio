@@ -24,6 +24,7 @@ Each investigation follows a structured workflow including:
 | 🔑 Linux Privilege Escalation Investigation | Ubuntu | Successful sudo to ROOT | ✅ Completed |
 | 🌐 Linux Listening Ports Monitoring | Ubuntu | Netstat listening ports status changed | ✅ Completed |
 | 👤 Linux User Account Creation Investigation | Ubuntu | New local user/group creation via `useradd` (MITRE T1136.001) | ✅ Completed |
+| 🔎 Nmap SSH Service Detection Investigation | Ubuntu | Custom Wazuh rule detecting Nmap SSH service scans (MITRE T1595, T1046) | ✅ Completed |
 
 ---
 
@@ -40,6 +41,7 @@ Each investigation follows a structured workflow including:
 - Privilege Escalation Analysis
 - Network Service Monitoring
 - User/Group Account Monitoring
+- Detection Engineering & Custom Rule Development
 - MITRE ATT&CK Mapping
 - Incident Documentation
 
