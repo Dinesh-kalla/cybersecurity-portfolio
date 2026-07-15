@@ -50,7 +50,7 @@ The account password was configured using the `passwd` command and verified usin
 
 ### Screenshot
 
-![Terminal](Screenshots/Terminal.png)
+![Terminal](screenshots/Terminal.png)
 
 ---
 
@@ -68,7 +68,7 @@ These alerts confirmed that Wazuh successfully monitored the activity performed 
 
 ### Screenshot
 
-![Dashboard](Screenshots/Dashboard.png)
+![Dashboard](screenshots/Dashboard.png)
 
 ---
 
@@ -90,7 +90,7 @@ This information allows a SOC analyst to reconstruct the account creation event 
 
 ### Screenshot
 
-![Log Details](Screenshots/Log_Details.png)
+![Log Details](screenshots/Log_Details.png)
 
 ---
 

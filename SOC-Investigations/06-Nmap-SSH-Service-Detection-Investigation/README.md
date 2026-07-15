@@ -1,6 +1,6 @@
 # SOC Investigation #06: Detecting Nmap SSH Service Detection with a Custom Wazuh Rule
 
-![Detection Alert](Screenshots/05-Detection-Alert.png)
+![Detection Alert](screenshots/05-Detection-Alert.png)
 
 ---
 
@@ -43,7 +43,7 @@ The `-sV` option performs **service version detection**, allowing Nmap to identi
 
 ## Attack Simulation
 
-![Nmap Service Scan](Screenshots/01-Nmap-Service-Scan.png)
+![Nmap Service Scan](screenshots/01-Nmap-Service-Scan.png)
 
 ---
 
@@ -68,7 +68,7 @@ These logs confirmed that reconnaissance activity reached the SSH service.
 
 ## Ubuntu SSH Logs
 
-![Ubuntu SSH Logs](Screenshots/02-Ubuntu-SSH-Logs.png)
+![Ubuntu SSH Logs](screenshots/02-Ubuntu-SSH-Logs.png)
 
 ---
 
@@ -96,7 +96,7 @@ This identified the correct parent rule required for building the custom detecti
 
 ### Wazuh Logtest
 
-![Wazuh Logtest](Screenshots/03-Wazuh-Logtest.png)
+![Wazuh Logtest](screenshots/03-Wazuh-Logtest.png)
 
 ---
 
@@ -124,7 +124,7 @@ The custom rule elevates SSH negotiation failures associated with Nmap reconnais
 
 ### Custom Wazuh Rule
 
-![Custom Wazuh Rule](Screenshots/04-Custom-Wazuh-Rule.png)
+![Custom Wazuh Rule](screenshots/04-Custom-Wazuh-Rule.png)
 
 ---
 
@@ -140,7 +140,7 @@ The validation completed successfully without XML syntax errors.
 
 ### Rule Validation
 
-![Rule Validation](Screenshots/06-Rule-Validation.png)
+![Rule Validation](screenshots/06-Rule-Validation.png)
 
 ---
 
@@ -162,7 +162,7 @@ The custom rule successfully generated alerts within **Wazuh Threat Hunting**, c
 
 ### Detection Results
 
-![Detection Alert](Screenshots/05-Detection-Alert.png)
+![Detection Alert](screenshots/05-Detection-Alert.png)
 
 ---
 
