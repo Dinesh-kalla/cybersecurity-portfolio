@@ -1,11 +1,17 @@
 # 🛡️ Cybersecurity Portfolio
 
 <p align="center">
+  <img src="assets/banner.svg" alt="Cybersecurity Portfolio Banner" width="100%"/>
+</p>
+
+<p align="center">
 
 ![Cybersecurity](https://img.shields.io/badge/Cybersecurity-Portfolio-blue)
 ![SOC Analyst](https://img.shields.io/badge/SOC-Analyst-success)
 ![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-blue)
 ![Sysmon](https://img.shields.io/badge/Sysmon-Endpoint-orange)
+![Wireshark](https://img.shields.io/badge/Wireshark-Network-blue)
+![Nmap](https://img.shields.io/badge/Nmap-Scanning-orange)
 ![Windows](https://img.shields.io/badge/Windows-11-0078D6)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-Linux-E95420)
 ![Kali Linux](https://img.shields.io/badge/Kali-Linux-557C94)

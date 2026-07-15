@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00BFFF"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="260" fill="url(#bg)"/>
+
+  <!-- subtle grid / circuit texture -->
+  <g stroke="#1f2937" stroke-width="1">
+    <line x1="0" y1="60" x2="1200" y2="60"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="150" y1="0" x2="150" y2="260"/>
+    <line x1="1050" y1="0" x2="1050" y2="260"/>
+  </g>
+
+  <!-- shield icon -->
+  <g transform="translate(70,80)">
+    <path d="M50 0 L95 18 V55 C95 85 75 100 50 110 C25 100 5 85 5 55 V18 Z"
+          fill="none" stroke="url(#accent)" stroke-width="4"/>
+    <path d="M35 55 L47 67 L70 40" fill="none" stroke="url(#accent)" stroke-width="5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- title -->
+  <text x="220" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="46"
+        font-weight="700" fill="#f9fafb">Cybersecurity Portfolio</text>
+
+  <!-- subtitle -->
+  <text x="220" y="160" font-family="'Fira Code', monospace" font-size="20"
+        fill="url(#accent)">SOC Analyst | Detection Engineering | Threat Hunting</text>
+  <text x="220" y="188" font-family="'Fira Code', monospace" font-size="20"
+        fill="#9ca3af">Wazuh · Linux · Networking · MITRE ATT&amp;CK</text>
+
+  <!-- bottom accent bar -->
+  <rect x="0" y="252" width="1200" height="8" fill="url(#accent)"/>
+</svg>
