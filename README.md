@@ -1,5 +1,3 @@
-# 🛡️ Cybersecurity Portfolio
-
 <p align="center">
   <img src="assets/banner.svg" alt="Cybersecurity Portfolio Banner" width="100%"/>
 </p>
@@ -21,7 +19,17 @@
 
 ---
 
-# 👋 About Me
+## 📚 Portfolio Navigation
+
+- 🏠 [Home Lab Setup](Home-Lab-Setup/)
+- 🛡️ [SOC Investigations](SOC-Investigations/)
+- 🌐 [Network Scanning](Network-Scanning/)
+- 📡 [Wireshark Traffic Analysis](Wireshark-Traffic-Analysis/)
+
+---
+
+## 👋 About Me
+
 
 Hello! I'm **Dinesh Babu**, a Computer Science graduate specializing in Cybersecurity with a strong interest in Security Operations Center (SOC) analysis, threat hunting, endpoint monitoring, and incident investigation.
 
