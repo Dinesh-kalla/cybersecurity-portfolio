@@ -1,11 +1,12 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Cybersecurity Portfolio Banner" width="100%"/>
+  <img src="assets/banner.svg" alt="Cybersecurity Portfolio Banner" width="100%">
 </p>
 
 <p align="center">
 
 ![Cybersecurity](https://img.shields.io/badge/Cybersecurity-Portfolio-blue)
 ![SOC Analyst](https://img.shields.io/badge/SOC-Analyst-success)
+![Detection Engineering](https://img.shields.io/badge/Detection-Engineering-purple)
 ![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-blue)
 ![Sysmon](https://img.shields.io/badge/Sysmon-Endpoint-orange)
 ![Wireshark](https://img.shields.io/badge/Wireshark-Network-blue)
@@ -19,7 +20,7 @@
 
 ---
 
-## 📚 Portfolio Navigation
+# 📚 Portfolio Navigation
 
 - 🏠 [Home Lab Setup](Home-Lab-Setup/)
 - 🛡️ [SOC Investigations](SOC-Investigations/)
@@ -28,153 +29,148 @@
 
 ---
 
-## 👋 About Me
+# 👋 About Me
 
+Hello! I'm **Dinesh Babu**, a Computer Science graduate specializing in Cybersecurity with a strong interest in **Security Operations Center (SOC)** operations, **Threat Hunting**, **Detection Engineering**, and **Incident Response**.
 
-Hello! I'm **Dinesh Babu**, a Computer Science graduate specializing in Cybersecurity with a strong interest in Security Operations Center (SOC) analysis, threat hunting, endpoint monitoring, and incident investigation.
+This repository showcases my hands-on cybersecurity learning through a self-built home lab, practical SOC investigations, network analysis, traffic analysis, and custom detection engineering using industry-standard security tools.
 
-This repository showcases my hands-on cybersecurity learning journey through practical home lab exercises, networking projects, traffic analysis, and SOC investigations using enterprise security tools.
+My objective is to continuously develop practical blue team skills while documenting every investigation in a structured and reproducible manner.
 
-My goal is to continuously develop real-world defensive security skills while preparing for an entry-level SOC Analyst role.
+---
+
+# 📊 Portfolio Statistics
+
+| Category | Count |
+|----------|------:|
+| Virtual Home Lab | 1 |
+| SOC Investigations | 6 |
+| Network Scanning Labs | 2 |
+| Wireshark Analysis Labs | 5 |
+| Custom Detection Rules | 1 |
 
 ---
 
 # 🏠 Cybersecurity Home Lab
 
-My practical investigations are performed inside an isolated VirtualBox environment consisting of multiple operating systems and security tools.
+My cybersecurity home lab is built using **Oracle VirtualBox** and is designed to simulate real-world attack and defense scenarios in an isolated environment. The environment provides a safe, isolated platform for simulating attacks, collecting security telemetry, investigating events, and validating detection rules without affecting production systems.
 
-```text
-                 +----------------------+
-                 |    Kali Linux        |
-                 |  Attack Simulation   |
-                 +----------+-----------+
-                            |
-                            |
-                 +----------v-----------+
-                 |   Ubuntu Desktop     |
-                 | Linux Endpoint       |
-                 +----------+-----------+
-                            |
-                            |
-                 +----------v-----------+
-                 | Windows 11 + Sysmon  |
-                 | Windows Endpoint     |
-                 +----------+-----------+
-                            |
-                 +----------v-----------+
-                 |    Wazuh Agent       |
-                 +----------+-----------+
-                            |
-                 +----------v-----------+
-                 |     Wazuh SIEM       |
-                 | Detection & Analysis |
-                 +----------------------+
-```
+## Lab Components
+
+| Machine | Role |
+|---------|------|
+| Kali Linux | Attacker Machine |
+| Ubuntu Desktop | Linux Endpoint |
+| Windows 11 | Windows Endpoint |
+| Wazuh Server | SIEM & Log Management |
+
+## Purpose
+
+- Simulate cyber attacks
+- Investigate security events
+- Practice Threat Hunting
+- Develop custom Wazuh detection rules
+- Improve SOC analyst skills
 
 ---
 
-# 📂 Repository Structure
+# 🛡️ SOC Investigations
 
-```text
-cybersecurity-portfolio
-│
-├── Home-Lab-Setup
-│
-├── Network-Scanning
-│
-├── Wireshark-Traffic-Analysis
-│
-└── SOC-Investigations
-    ├── Windows Process Investigation
-    ├── SSH Authentication Failure Investigation
-    ├── Linux Privilege Escalation Investigation
-    ├── Linux User Account Creation Investigation
-    ├── Linux Listening Ports Investigation
-    ├── Nmap SSH Service Detection Investigation
-    └── README.md
-```
+| # | Investigation | Platform | Detection |
+|---|--------------|----------|-----------|
+| 01 | Windows Process Investigation | Windows 11 | Sysmon Process Creation (`whoami /priv`) |
+| 02 | SSH Authentication Failure Investigation | Ubuntu Linux | Multiple failed SSH logins followed by successful authentication |
+| 03 | Linux Privilege Escalation Investigation | Ubuntu Linux | Successful `sudo` privilege escalation |
+| 04 | Linux User Account Creation Investigation | Ubuntu Linux | New local user/group creation via `useradd` (MITRE T1136.001) |
+| 05 | Linux Listening Ports Investigation | Ubuntu Linux | Monitoring changes to listening network ports |
+| 06 | Nmap SSH Service Detection Investigation | Ubuntu Linux | Custom Wazuh rule detecting Nmap SSH service scans (MITRE T1595, T1046) |
+
+Explore all investigations here:
+
+➡️ **[SOC Investigations](SOC-Investigations/)**
 
 ---
 
-# 🛡️ Featured SOC Investigations
+# 🌐 Network Scanning
 
-| Investigation | Platform | Detection |
-|---------------|----------|-----------|
-| 🔐 SSH Authentication Failure Investigation | Ubuntu Linux | Multiple failed SSH logins followed by successful authentication |
-| 🖥️ Windows Process Investigation | Windows 11 | Sysmon Process Creation (`whoami /priv`) |
-| 🔑 Linux Privilege Escalation Investigation | Ubuntu Linux | Successful `sudo` privilege escalation |
-| 🌐 Linux Listening Ports Monitoring | Ubuntu Linux | Monitoring changes to listening network ports |
-| 👤 Linux User Account Creation Investigation | Ubuntu Linux | New local user/group creation via `useradd` (MITRE T1136.001) |
-| 🔎 Nmap SSH Service Detection Investigation | Ubuntu Linux | Custom Wazuh rule detecting Nmap SSH service scans (MITRE T1595, T1046) |
+Hands-on network enumeration and reconnaissance using Nmap.
 
----
+Current topics include:
 
-# 🌐 Networking Projects
-
-- Network Scanning
 - Host Discovery
 - Port Scanning
-- Service Enumeration
-- Network Reconnaissance
+- Service Detection
+
+➡️ **[Network Scanning](Network-Scanning/)**
 
 ---
 
-# 🦈 Traffic Analysis
+# 📡 Wireshark Traffic Analysis
 
-- Wireshark Packet Analysis
-- Protocol Inspection
-- Packet Filtering
-- Traffic Investigation
-- Network Traffic Analysis
+Practical packet analysis covering:
+
+- HTTP
+- DNS
+- HTTPS/TLS
+- TCP Three-Way Handshake
+- ICMP
+- ARP
+
+➡️ **[Wireshark Traffic Analysis](Wireshark-Traffic-Analysis/)**
 
 ---
 
-# 🛠️ Technologies & Tools
+# 🛠️ Technical Skills
 
-### SIEM
+## Security
 
-- Wazuh
+- Security Operations Center (SOC)
+- Detection Engineering
+- Threat Hunting
+- Incident Investigation
+- Log Analysis
+- MITRE ATT&CK Mapping
 
-### Endpoint Monitoring
+## Networking
 
+- TCP/IP
+- SSH
+- DNS
+- HTTP / HTTPS
+- ICMP
+- ARP
+- Network Scanning
+
+## Operating Systems
+
+- Linux
+- Windows
+
+---
+
+# 🧰 Tools & Technologies
+
+## SIEM & Security
+
+- Wazuh SIEM
 - Sysmon
 
-### Operating Systems
+## Network Analysis
 
-- Windows 11
-- Ubuntu Linux
-- Kali Linux
-
-### Networking
-
-- Nmap
 - Wireshark
+- Nmap
 
-### Virtualization
+## Operating Systems
+
+- Kali Linux
+- Ubuntu
+- Windows 11
+
+## Virtualization & Version Control
 
 - Oracle VirtualBox
-
-### Security Frameworks
-
-- MITRE ATT&CK
-
----
-
-# 💼 Skills Demonstrated
-
-- Security Event Investigation
-- Threat Hunting
-- Windows Security Monitoring
-- Linux Security Monitoring
-- Authentication Analysis
-- Process Creation Analysis
-- Privilege Escalation Analysis
-- Detection Engineering & Custom Rule Development
-- Network Traffic Analysis
-- Log Analysis
-- Event Correlation
-- MITRE ATT&CK Mapping
-- Incident Documentation
+- Git
+- GitHub
 
 ---
 
@@ -182,43 +178,30 @@ cybersecurity-portfolio
 
 ## ✅ Completed
 
-- Wazuh SIEM Deployment
-- Sysmon Integration
-- Windows Endpoint Monitoring
-- Linux Endpoint Monitoring
-- SSH Authentication Investigation
-- Windows Process Investigation
-- Linux Privilege Escalation Investigation
-- Linux Listening Ports Monitoring
-- Linux User Account Creation Investigation
-- Nmap SSH Service Detection Investigation (Custom Wazuh Rule)
-- Wireshark Traffic Analysis
+- Home Lab Setup
+- Windows Event Investigation
+- Linux Security Monitoring
 - Network Scanning
+- Wireshark Traffic Analysis
+- Detection Engineering & Custom Wazuh Rule Development
 
-## 🚧 In Progress
+## 🔄 Currently Learning
 
-- Windows Failed Logon Investigation
+- Reverse Shell Detection
 - File Integrity Monitoring (FIM)
-- Windows PowerShell Investigation
+- Linux Persistence Detection
+- Web Attack Detection
 - Advanced Threat Hunting
-- Incident Response Scenarios
-
----
-
-# 🎯 Career Objective
-
-I am actively developing practical SOC Analyst skills through hands-on investigations, security monitoring, and threat hunting using enterprise security tools.
-
-This portfolio demonstrates my ability to simulate, detect, investigate, analyze, and document security events using a structured SOC investigation methodology aligned with industry best practices.
 
 ---
 
 # 📬 Connect With Me
 
-- **LinkedIn:** https://www.linkedin.com/in/dinesh-babu-2866a0275
 - **GitHub:** https://github.com/Dinesh-kalla
+- **LinkedIn:** https://www.linkedin.com/in/dinesh-babu-2866a0275
 
 ---
 
-⭐ **Thank you for visiting my cybersecurity portfolio!**  
-I will continue expanding this repository with additional SOC investigations, threat hunting scenarios, and security projects as I progress in my cybersecurity journey.
+⭐ Thank you for visiting my cybersecurity portfolio!
+
+This repository is continuously updated as I complete new labs, investigations, and detection engineering projects while working toward becoming a SOC Analyst.
