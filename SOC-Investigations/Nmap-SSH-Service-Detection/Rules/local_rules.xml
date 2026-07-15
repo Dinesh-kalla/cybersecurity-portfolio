@@ -1,0 +1,9 @@
+<rule id="100200" level="10">
+    <if_sid>5752</if_sid>
+    <match>Unable to negotiate</match>
+    <description>Possible Nmap SSH Service Detection Scan</description>
+    <mitre>
+        <id>T1595</id>
+        <id>T1046</id>
+    </mitre>
+</rule>
