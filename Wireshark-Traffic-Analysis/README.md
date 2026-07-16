@@ -55,7 +55,8 @@ The purpose of these labs is to develop practical packet analysis skills by obse
 | DNS | Domain name resolution | ✅ |
 | HTTP | Web traffic analysis | ✅ |
 | HTTPS/TLS | Secure web traffic analysis | ✅ |
-| DHCP | Automatic IP configuration | 🚧 |
+| DHCP | Automatic IP configuration | ✅ |
+| SSH | Encrypted remote administration | ✅ |
 
 ---
 
@@ -203,23 +204,66 @@ Analyzed HTTPS traffic and the TLS handshake process to understand what metadata
 
 ---
 
+## ✅ Lab 06 – DHCP Investigation
+
+### Objective
+
+Captured and analyzed the DHCP DORA (Discover, Offer, Request, Acknowledge) process to understand how a client automatically obtains network configuration from a DHCP server.
+
+### Topics Covered
+
+- DHCP DORA Process
+- UDP Protocol Analysis
+- Client/Server Lease Negotiation
+- Network Configuration Assignment
+- Packet Inspection
+
+📂 **Lab Folder**
+
+[Lab-06-DHCP-Investigation](Lab-06-DHCP-Investigation)
+
+---
+
+## ✅ Lab 07 – SSH Traffic Investigation
+
+### Objective
+
+Analyzed the SSH protocol handshake and encrypted session establishment between a client and server, examining the TCP handshake, SSH version exchange, and key exchange process.
+
+### Topics Covered
+
+- TCP Three-Way Handshake
+- SSH Version Exchange
+- Key Exchange Process
+- Encrypted Session Analysis
+- Secure Remote Administration (SOC Perspective)
+
+📂 **Lab Folder**
+
+[Lab-07-SSH-Traffic-Investigation](Lab-07-SSH-Traffic-Investigation)
+
+---
+
 # Skills Matrix
 
-| Skill | Lab 01 | Lab 02 | Lab 03 | Lab 04 | Lab 05 |
-|--------|:------:|:------:|:------:|:------:|:------:|
-| Wireshark | ✅ | ✅ | ✅ | ✅ | ✅ |
-| ICMP Analysis | ✅ | | | | |
-| ARP Analysis | ✅ | ✅ | | | |
-| TCP Analysis | ✅ | | | ✅ | |
-| DNS Analysis | | | ✅ | | |
-| HTTP Analysis | | | | ✅ | |
-| TLS/HTTPS Analysis | | | | | ✅ |
-| Packet Filtering | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Packet Capture | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Incident Investigation | | ✅ | | | |
-| Root Cause Analysis | | ✅ | | | |
-| MITM Concepts | | ✅ | | | |
-| Certificate Validation | | | | | ✅ |
+| Skill | Lab 01 | Lab 02 | Lab 03 | Lab 04 | Lab 05 | Lab 06 | Lab 07 |
+|--------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| Wireshark | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| ICMP Analysis | ✅ | | | | | | |
+| ARP Analysis | ✅ | ✅ | | | | | |
+| TCP Analysis | ✅ | | | ✅ | | | ✅ |
+| DNS Analysis | | | ✅ | | | | |
+| HTTP Analysis | | | | ✅ | | | |
+| TLS/HTTPS Analysis | | | | | ✅ | | |
+| DHCP Analysis | | | | | | ✅ | |
+| SSH Analysis | | | | | | | ✅ |
+| Packet Filtering | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Packet Capture | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Incident Investigation | | ✅ | | | | | |
+| Root Cause Analysis | | ✅ | | | | | |
+| MITM Concepts | | ✅ | | | | | |
+| Certificate Validation | | | | | ✅ | | |
+| Encrypted Traffic Analysis | | | | | ✅ | | ✅ |
 
 ---
 
@@ -234,6 +278,8 @@ Analyzed HTTPS traffic and the TLS handshake process to understand what metadata
 - DNS
 - HTTP
 - TLS/HTTPS
+- DHCP
+- SSH
 
 ## Packet Analysis
 
@@ -312,9 +358,7 @@ Document Results
 
 # Upcoming Labs
 
-- DHCP Analysis
 - FTP Traffic Analysis
-- SSH Packet Analysis
 - SMB Analysis
 - NAT Investigation
 - VLAN Traffic Analysis

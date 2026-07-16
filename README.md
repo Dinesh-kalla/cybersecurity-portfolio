@@ -46,7 +46,7 @@ My objective is to continuously develop practical blue team skills while documen
 | Virtual Home Lab | 1 |
 | SOC Investigations | 6 |
 | Network Scanning Labs | 2 |
-| Wireshark Analysis Labs | 5 |
+| Wireshark Analysis Labs | 7 |
 | Custom Detection Rules | 1 |
 
 ---
@@ -112,6 +112,8 @@ Practical packet analysis covering:
 - HTTP
 - DNS
 - HTTPS/TLS
+- DHCP
+- SSH
 - TCP Three-Way Handshake
 - ICMP
 - ARP
