@@ -172,31 +172,31 @@ Evidence/
 
 ## DHCP Discover
 
-![DHCP Discover](Screenshots/01-dhcp-discover.png)
+![DHCP Discover](screenshots/01-dhcp-discover.png)
 
 ---
 
 ## DHCP Offer
 
-![DHCP Offer](Screenshots/02-dhcp-offer.png)
+![DHCP Offer](screenshots/02-dhcp-offer.png)
 
 ---
 
 ## DHCP Request
 
-![DHCP Request](Screenshots/03-dhcp-request.png)
+![DHCP Request](screenshots/03-dhcp-request.png)
 
 ---
 
 ## DHCP ACK
 
-![DHCP ACK](Screenshots/04-dhcp-ack.png)
+![DHCP ACK](screenshots/04-dhcp-ack.png)
 
 ---
 
 ## DHCP DORA Overview
 
-![DORA Process](Screenshots/05-dora-overview.png)
+![DORA Process](screenshots/05-dora-overview.png)
 
 ---
 
