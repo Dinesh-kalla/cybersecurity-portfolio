@@ -33,7 +33,7 @@ This project demonstrates practical Nmap techniques performed against multiple v
                  |    (Attacker VM)     |
                  +----------+-----------+
                             |
-                     Host-Only Network
+                     Internal Network
                             |
         +-------------------+-------------------+
         |                   |                   |
