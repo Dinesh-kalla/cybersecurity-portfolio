@@ -45,7 +45,7 @@ My objective is to continuously develop practical blue team skills while documen
 |----------|------:|
 | Virtual Home Lab | 1 |
 | SOC Investigations | 6 |
-| Network Scanning Labs | 2 |
+| Network Scanning Labs | 6 |
 | Wireshark Analysis Labs | 7 |
 | Custom Detection Rules | 1 |
 
@@ -98,8 +98,11 @@ Hands-on network enumeration and reconnaissance using Nmap.
 Current topics include:
 
 - Host Discovery
-- Port Scanning
-- Service Detection
+- TCP Connect Scanning
+- SYN Scanning
+- Service Version Detection
+- Operating System Detection
+- NSE Vulnerability Scanning
 
 ➡️ **[Network Scanning](Network-Scanning/)**
 
