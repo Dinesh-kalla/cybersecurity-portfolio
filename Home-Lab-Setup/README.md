@@ -1,4 +1,4 @@
-# 🛡️ Cybersecurity Portfolio
+# 🏠 Home Lab Setup & Wazuh SIEM Integration
 
 ![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-blue)
 ![Kali Linux](https://img.shields.io/badge/Kali-Linux-557C94)
@@ -13,15 +13,13 @@ This repository showcases my hands-on cybersecurity projects and practical SOC A
 
 ---
 
-## 📂 Repository Contents
+## 📂 In This Section
 
-* 🏠 Home Lab Setup
+* 🏠 Home Lab Infrastructure & Network Architecture
 * 🛡️ Wazuh SIEM Integration
-* 🌐 Network Scanning
-* 📡 Wireshark Traffic Analysis
-* 🔍 Security Event Investigation
+* 📸 Screenshots & Evidence
 * 🚀 Future Enhancements
-
+* 🏆 Portfolio Relevance & Project Outcome
 ---
 
 # 🏠 Home Lab Setup
