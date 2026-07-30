@@ -1,0 +1,37 @@
+<!-- ========================================================= -->
+<!-- Active Directory Detection Rules                          -->
+<!-- ========================================================= -->
+
+<group name="windows,active_directory,">
+
+  <!-- Kerberos Service Ticket Request (4769) -->
+  <rule id="100400" level="5">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4769$</field>
+    <description>Windows: Kerberos service ticket requested for $(win.eventdata.serviceName)</description>
+    <group>windows,kerberos,active_directory,</group>
+  </rule>
+
+  <!-- Kerberoasting (RC4) -->
+  <rule id="100401" level="12">
+    <if_sid>100400</if_sid>
+    <field name="win.eventdata.ticketEncryptionType">^0x17$</field>
+    <description>Possible Kerberoasting: RC4-encrypted Kerberos ticket requested for $(win.eventdata.serviceName) by $(win.eventdata.targetUserName)</description>
+    <mitre>
+      <id>T1558.003</id>
+    </mitre>
+    <group>attack,kerberoasting,windows,active_directory,</group>
+  </rule>
+
+  <!-- User Account Created -->
+  <rule id="100410" level="10">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4720$</field>
+    <description>Windows: User account created - $(win.eventdata.targetUserName)</description>
+    <mitre>
+      <id>T1136</id>
+    </mitre>
+    <group>attack,persistence,windows,active_directory,user_creation,</group>
+  </rule>
+
+</group>
