@@ -1,19 +1,45 @@
 # SOC Investigation #07: Detecting a Kerberoasting Attack with Wazuh SIEM
 
-## Overview
+![Platform](https://img.shields.io/badge/Platform-Windows%20Active%20Directory-blue)
+![SIEM](https://img.shields.io/badge/SIEM-Wazuh-green)
+![Attack](https://img.shields.io/badge/MITRE-T1558.003-red)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
-This investigation demonstrates how a **Kerberoasting attack** can be simulated and detected in an Active Directory environment using **Wazuh SIEM**. A vulnerable service account with a registered Service Principal Name (SPN) was targeted using **Rubeus**, generating a Kerberos service ticket request (Event ID 4769). Windows Security logs were collected by Wazuh, and a custom detection rule identified the attack based on the use of **RC4 encryption (0x17)**.
+---
+
+# Overview
+
+This project demonstrates the detection and investigation of a **Kerberoasting attack** in a Windows Active Directory environment using **Wazuh SIEM**.
+
+A vulnerable service account (**svc-sql**) was configured with a Service Principal Name (SPN). Using **Rubeus**, a Kerberos service ticket was requested to simulate a Kerberoasting attack. Windows Security Event **4769** was generated, collected by Wazuh, and detected through a **custom Wazuh rule** designed to identify RC4-encrypted Kerberos service ticket requests.
+
+This investigation showcases practical skills in:
+
+- Active Directory Security
+- Kerberos Authentication
+- SIEM Monitoring
+- Detection Engineering
+- Windows Event Log Analysis
+- MITRE ATT&CK Mapping
+- SOC Investigation
+
+---
+
+# Lab Architecture
+
+![Lab Architecture](screenshots/01-Lab-Architecture.png)
 
 ---
 
 # Objectives
 
-- Configure a Kerberoastable service account
-- Simulate a Kerberoasting attack using Rubeus
-- Monitor Kerberos activity using Windows Event Logs
-- Detect suspicious ticket requests with Wazuh
-- Investigate the generated security alert
-- Map the activity to the MITRE ATT&CK framework
+- Build an Active Directory lab environment.
+- Configure a Kerberoastable service account.
+- Simulate a Kerberoasting attack using Rubeus.
+- Monitor Windows Security events with Wazuh.
+- Analyze Event ID 4769.
+- Develop a custom Wazuh detection rule.
+- Map the attack to the MITRE ATT&CK framework.
 
 ---
 
@@ -31,16 +57,41 @@ This investigation demonstrates how a **Kerberoasting attack** can be simulated 
 
 ---
 
+# Attack Scenario
+
+Kerberoasting is an attack technique where a domain user requests a Kerberos service ticket (TGS) for a service account that has a registered Service Principal Name (SPN). The encrypted ticket can then be extracted and cracked offline to recover the service account password.
+
+During this investigation:
+
+- A service account (**svc-sql**) was configured with an SPN.
+- A domain user (**testuser**) requested a service ticket using **Rubeus**.
+- Windows generated Security Event **4769**.
+- Wazuh collected and analyzed the event.
+- A custom rule generated a high-severity alert for potential Kerberoasting activity.
+
+---
+
+# MITRE ATT&CK Mapping
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Credential Access | Kerberoasting | T1558.003 |
+
+---
+
 # Attack Workflow
 
-```
-Windows 11 Client
-(testuser)
+```text
+Domain User (testuser)
         │
-        │ Rubeus Kerberoast
         ▼
-Domain Controller
-(Event ID 4769)
+Rubeus Kerberoast Attack
+        │
+        ▼
+Kerberos TGS Request
+        │
+        ▼
+Windows Security Event 4769
         │
         ▼
 Wazuh Agent
@@ -49,7 +100,7 @@ Wazuh Agent
 Wazuh Manager
         │
         ▼
-Custom Rule 100401
+Custom Detection Rule (100401)
         │
         ▼
 SOC Investigation
@@ -57,27 +108,19 @@ SOC Investigation
 
 ---
 
-# MITRE ATT&CK
-
-| Tactic | Technique | ID |
-|---------|-----------|----|
-| Credential Access | Kerberoasting | T1558.003 |
-
----
-
 # Investigation Steps
 
 ## Step 1 – Configure the Service Account
 
-A service account named **svc-sql** was configured with a Service Principal Name (SPN), making it eligible for Kerberos service ticket requests.
+A vulnerable service account named **svc-sql** was configured with a Service Principal Name (SPN).
 
-**Command**
+Command:
 
 ```powershell
 setspn -L svc-sql
 ```
 
-### Screenshot
+### Evidence
 
 ![SPN Configuration](screenshots/02-SPN-Configuration.png)
 
@@ -85,17 +128,17 @@ setspn -L svc-sql
 
 ## Step 2 – Simulate the Kerberoasting Attack
 
-Using Rubeus, a Kerberos service ticket was requested for the service account.
+The attack was simulated using **Rubeus**.
 
-**Command**
+Command:
 
 ```cmd
 Rubeus.exe kerberoast /user:svc-sql
 ```
 
-The tool successfully retrieved the Kerberos TGS hash.
+The tool successfully requested a Kerberos service ticket and extracted the TGS hash.
 
-### Screenshot
+### Evidence
 
 ![Kerberoast Attack](screenshots/03-Kerberoast-Attack.png)
 
@@ -103,76 +146,76 @@ The tool successfully retrieved the Kerberos TGS hash.
 
 ## Step 3 – Windows Event Generation
 
-The Domain Controller logged **Windows Security Event ID 4769**, indicating that a Kerberos service ticket had been requested.
+The Domain Controller generated **Windows Security Event ID 4769**.
 
-Important fields observed:
+Key event information:
 
-- Event ID: 4769
-- Account Name: testuser@CORP.LOCAL
-- Service Name: svc-sql
-- Client Address: 192.168.56.70
+| Field | Value |
+|--------|-------|
+| Event ID | 4769 |
+| User | testuser@CORP.LOCAL |
+| Service | svc-sql |
+| Source IP | 192.168.56.70 |
+| Encryption | RC4 (0x17) |
 
-### Screenshot
+### Evidence
 
-![Event Viewer](screenshots/04-EventID-4769.png)
+![Windows Event](screenshots/04-EventID-4769.png)
 
 ---
 
 ## Step 4 – Wazuh Detection
 
-The Windows Security event was forwarded to Wazuh, where a custom detection rule identified the activity as a potential Kerberoasting attack.
+The event was collected by the Wazuh agent and forwarded to the Wazuh Manager.
 
-**Rule ID**
+A custom detection rule identified the activity as a potential Kerberoasting attack.
 
-```
-100401
-```
+Alert Details:
 
-**Alert Severity**
+| Field | Value |
+|--------|-------|
+| Rule ID | 100401 |
+| Severity | Level 12 |
+| MITRE Technique | T1558.003 |
+| Description | Possible Kerberoasting: RC4-encrypted Kerberos ticket requested |
 
-```
-12 (High)
-```
-
-### Screenshot
+### Evidence
 
 ![Wazuh Alert](screenshots/05-Wazuh-Alert.png)
 
 ---
 
-## Step 5 – Alert Analysis
+## Step 5 – Event Analysis
 
-The Wazuh event contained the following indicators:
+The Wazuh alert was reviewed to validate the attack.
 
-| Field | Value |
-|------|-------|
-| Event ID | 4769 |
-| User | testuser@CORP.LOCAL |
-| Service Account | svc-sql |
-| Source IP | 192.168.56.70 |
-| Ticket Encryption | 0x17 (RC4) |
-| Status | Success |
+Important indicators included:
 
-The alert was generated because the Kerberos service ticket was issued using **RC4 encryption (0x17)**, a common characteristic monitored during Kerberoasting detection.
+- Event ID 4769
+- User: **testuser**
+- Service Account: **svc-sql**
+- Ticket Encryption: **RC4 (0x17)**
+- Successful ticket request
 
-### Screenshot
+### Evidence
 
-![Wazuh Event Details](screenshots/06-Wazuh-Event-Details.png)
+![Event Details](screenshots/06-Wazuh-Event-Details.png)
 
 ---
 
 ## Step 6 – Detection Engineering
 
-A custom Wazuh rule was created to identify RC4-encrypted Kerberos service ticket requests associated with Event ID 4769.
+To improve visibility into Kerberoasting activity, a custom Wazuh rule was created.
 
-The rule:
+Detection Logic:
 
-- Extends the default Kerberos detection
-- Detects RC4 (0x17) encryption
-- Maps the alert to MITRE ATT&CK T1558.003
-- Generates a High Severity alert
+- Parent Rule: 100400
+- Event ID: 4769
+- Ticket Encryption Type: 0x17
+- Severity: 12
+- MITRE ATT&CK: T1558.003
 
-### Screenshot
+### Evidence
 
 ![Custom Rule](screenshots/07-Custom-Wazuh-Rule.png)
 
@@ -187,44 +230,57 @@ The rule:
 | User | testuser@CORP.LOCAL |
 | Service Account | svc-sql |
 | Source IP | 192.168.56.70 |
-| Encryption | RC4 (0x17) |
+| Ticket Encryption | RC4 (0x17) |
 
 ---
 
-# Detection Logic
+# Repository Structure
 
-The custom detection rule identifies:
+```text
+07-Kerberoasting-Detection-Investigation/
+│
+├── README.md
+│
+├── screenshots/
+│   ├── 01-Lab-Architecture.png
+│   ├── 02-SPN-Configuration.png
+│   ├── 03-Kerberoast-Attack.png
+│   ├── 04-EventID-4769.png
+│   ├── 05-Wazuh-Alert.png
+│   ├── 06-Wazuh-Event-Details.png
+│   └── 07-Custom-Wazuh-Rule.png
+│
+├── logs/
+│   ├── README.md
+│   └── kerberoasting-event-4769.json
+│
+└── rules/
+    ├── README.md
+    └── local_active_directory.xml
+```
 
-- Windows Security Event ID 4769
-- Kerberos service ticket requests
-- RC4 encryption (0x17)
+---
 
-These indicators together provide a strong signal of potential Kerberoasting activity that warrants analyst investigation.
+# Detection Rule
+
+The custom Wazuh rule detects:
+
+- Windows Security Event ID **4769**
+- RC4-encrypted Kerberos service tickets (**0x17**)
+- Service ticket requests associated with Kerberoasting activity
+
+The rule generates a **Level 12** alert and maps the activity to **MITRE ATT&CK T1558.003 – Kerberoasting**.
 
 ---
 
 # Recommendations
 
-- Use long, randomly generated passwords for service accounts.
-- Prefer AES encryption over RC4 whenever possible.
-- Implement Group Managed Service Accounts (gMSAs).
-- Monitor Event ID 4769 for abnormal service ticket requests.
+- Use strong, unique passwords for service accounts.
+- Replace RC4 encryption with AES where possible.
+- Use Group Managed Service Accounts (gMSAs).
+- Monitor Event ID 4769 for unusual service ticket activity.
 - Audit Service Principal Names (SPNs) regularly.
-- Investigate repeated TGS requests from the same user or workstation.
-
----
-
-# Screenshots
-
-| Screenshot | Description |
-|------------|-------------|
-| ![](screenshots/01-Lab-Architecture.png) | Lab Architecture |
-| ![](screenshots/02-SPN-Configuration.png) | SPN Configuration |
-| ![](screenshots/03-Kerberoast-Attack.png) | Kerberoasting Attack |
-| ![](screenshots/04-EventID-4769.png) | Windows Event ID 4769 |
-| ![](screenshots/05-Wazuh-Alert.png) | Wazuh Detection |
-| ![](screenshots/06-Wazuh-Event-Details.png) | Alert Details |
-| ![](screenshots/07-Custom-Wazuh-Rule.png) | Custom Detection Rule |
+- Investigate repeated service ticket requests from the same user or endpoint.
 
 ---
 
@@ -232,16 +288,32 @@ These indicators together provide a strong signal of potential Kerberoasting act
 
 - Active Directory Administration
 - Kerberos Authentication
-- Kerberoasting Attack Simulation
+- Attack Simulation
 - Windows Event Log Analysis
 - Wazuh SIEM
 - Detection Engineering
 - Threat Hunting
 - MITRE ATT&CK Mapping
 - SOC Investigation
+- Incident Analysis
+
+---
+
+# Evidence
+
+This investigation includes:
+
+- Lab architecture screenshots
+- SPN configuration
+- Kerberoasting attack execution
+- Windows Security Event 4769
+- Wazuh alert details
+- Custom Wazuh detection rule
+- Raw Wazuh JSON alert
+- Detection rule source code
 
 ---
 
 # Conclusion
 
-This investigation demonstrates the end-to-end detection of a Kerberoasting attack within an Active Directory environment. The attack was simulated using Rubeus, captured through Windows Security Event ID 4769, and successfully detected by Wazuh using a custom detection rule. The project highlights practical experience in Active Directory security, SIEM monitoring, event analysis, and detection engineering, reflecting the workflow of a SOC analyst investigating credential access techniques.
+This project demonstrates an end-to-end detection workflow for a Kerberoasting attack within an Active Directory environment. A simulated attack generated a Kerberos service ticket request, which was captured as **Windows Security Event ID 4769**, ingested by **Wazuh SIEM**, and successfully detected using a custom detection rule. The investigation highlights practical experience in Active Directory security, Windows event analysis, detection engineering, and SOC investigation methodologies while aligning with the **MITRE ATT&CK** framework.

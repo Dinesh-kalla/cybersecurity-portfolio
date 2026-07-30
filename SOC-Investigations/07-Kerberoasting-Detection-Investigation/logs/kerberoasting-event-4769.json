@@ -1,0 +1,94 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.07.30",
+  "_id": "Mrp9s58BtI3A-rFuvWvz",
+  "_score": 1,
+  "_source": {
+    "agent": {
+      "ip": "192.168.56.60",
+      "name": "AD-DC01",
+      "id": "009"
+    },
+    "manager": {
+      "name": "wazuhserver"
+    },
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonGuid": "{d42afd3a-731a-7009-d1bf-c099ec891264}",
+          "targetUserName": "testuser@CORP.LOCAL",
+          "ticketOptions": "0x40800000",
+          "ipPort": "63601",
+          "ipAddress": "::ffff:192.168.56.70",
+          "targetDomainName": "CORP.LOCAL",
+          "serviceSid": "S-1-5-21-1118207318-1285192049-3662775708-1108",
+          "serviceName": "svc-sql",
+          "ticketEncryptionType": "0x17",
+          "status": "0x0"
+        },
+        "system": {
+          "eventID": "4769",
+          "keywords": "0x8020000000000000",
+          "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+          "level": "0",
+          "channel": "Security",
+          "opcode": "0",
+          "message": "\"A Kerberos service ticket was requested.\r\n\r\nAccount Information:\r\n\tAccount Name:\t\ttestuser@CORP.LOCAL\r\n\tAccount Domain:\t\tCORP.LOCAL\r\n\tLogon GUID:\t\t{d42afd3a-731a-7009-d1bf-c099ec891264}\r\n\r\nService Information:\r\n\tService Name:\t\tsvc-sql\r\n\tService ID:\t\tS-1-5-21-1118207318-1285192049-3662775708-1108\r\n\r\nNetwork Information:\r\n\tClient Address:\t\t::ffff:192.168.56.70\r\n\tClient Port:\t\t63601\r\n\r\nAdditional Information:\r\n\tTicket Options:\t\t0x40800000\r\n\tTicket Encryption Type:\t0x17\r\n\tFailure Code:\t\t0x0\r\n\tTransited Services:\t-\r\n\r\nThis event is generated every time access is requested to a resource such as a computer or a Windows service.  The service name indicates the resource to which access was requested.\r\n\r\nThis event can be correlated with Windows logon events by comparing the Logon GUID fields in each event.  The logon event occurs on the machine that was accessed, which is often a different machine than the domain controller which issued the service ticket.\r\n\r\nTicket options, encryption types, and failure codes are defined in RFC 4120.\"",
+          "version": "0",
+          "systemTime": "2026-07-30T14:46:27.9600436Z",
+          "eventRecordID": "14027",
+          "threadID": "3740",
+          "computer": "DC01.corp.local",
+          "task": "14337",
+          "processID": "644",
+          "severityValue": "AUDIT_SUCCESS",
+          "providerName": "Microsoft-Windows-Security-Auditing"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 1,
+      "mail": true,
+      "level": 12,
+      "description": "Possible Kerberoasting: RC4-encrypted Kerberos ticket requested for svc-sql by testuser@CORP.LOCAL",
+      "groups": [
+        "windows",
+        "active_directory",
+        "attack",
+        "kerberoasting",
+        "windows",
+        "active_directory"
+      ],
+      "mitre": {
+        "technique": [
+          "Kerberoasting"
+        ],
+        "id": [
+          "T1558.003"
+        ],
+        "tactic": [
+          "Credential Access"
+        ]
+      },
+      "id": "100401"
+    },
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4769\",\"version\":\"0\",\"level\":\"0\",\"task\":\"14337\",\"opcode\":\"0\",\"keywords\":\"0x8020000000000000\",\"systemTime\":\"2026-07-30T14:46:27.9600436Z\",\"eventRecordID\":\"14027\",\"processID\":\"644\",\"threadID\":\"3740\",\"channel\":\"Security\",\"computer\":\"DC01.corp.local\",\"severityValue\":\"AUDIT_SUCCESS\",\"message\":\"\\\"A Kerberos service ticket was requested.\\r\\n\\r\\nAccount Information:\\r\\n\\tAccount Name:\\t\\ttestuser@CORP.LOCAL\\r\\n\\tAccount Domain:\\t\\tCORP.LOCAL\\r\\n\\tLogon GUID:\\t\\t{d42afd3a-731a-7009-d1bf-c099ec891264}\\r\\n\\r\\nService Information:\\r\\n\\tService Name:\\t\\tsvc-sql\\r\\n\\tService ID:\\t\\tS-1-5-21-1118207318-1285192049-3662775708-1108\\r\\n\\r\\nNetwork Information:\\r\\n\\tClient Address:\\t\\t::ffff:192.168.56.70\\r\\n\\tClient Port:\\t\\t63601\\r\\n\\r\\nAdditional Information:\\r\\n\\tTicket Options:\\t\\t0x40800000\\r\\n\\tTicket Encryption Type:\\t0x17\\r\\n\\tFailure Code:\\t\\t0x0\\r\\n\\tTransited Services:\\t-\\r\\n\\r\\nThis event is generated every time access is requested to a resource such as a computer or a Windows service.  The service name indicates the resource to which access was requested.\\r\\n\\r\\nThis event can be correlated with Windows logon events by comparing the Logon GUID fields in each event.  The logon event occurs on the machine that was accessed, which is often a different machine than the domain controller which issued the service ticket.\\r\\n\\r\\nTicket options, encryption types, and failure codes are defined in RFC 4120.\\\"\"},\"eventdata\":{\"targetUserName\":\"testuser@CORP.LOCAL\",\"targetDomainName\":\"CORP.LOCAL\",\"serviceName\":\"svc-sql\",\"serviceSid\":\"S-1-5-21-1118207318-1285192049-3662775708-1108\",\"ticketOptions\":\"0x40800000\",\"ticketEncryptionType\":\"0x17\",\"ipAddress\":\"::ffff:192.168.56.70\",\"ipPort\":\"63601\",\"status\":\"0x0\",\"logonGuid\":\"{d42afd3a-731a-7009-d1bf-c099ec891264}\"}}}",
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2026-07-30T14:46:28.454Z",
+    "location": "EventChannel",
+    "id": "1785422788.43064287",
+    "timestamp": "2026-07-30T14:46:28.454+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-07-30T14:46:28.454Z"
+    ],
+    "@timestamp": [
+      "2026-07-30T14:46:28.454Z"
+    ]
+  }
+}
