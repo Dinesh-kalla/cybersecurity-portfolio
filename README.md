@@ -44,10 +44,10 @@ My objective is to continuously develop practical blue team skills while documen
 | Category | Count |
 |----------|------:|
 | Virtual Home Lab | 1 |
-| SOC Investigations | 6 |
+| SOC Investigations | 7 |
 | Network Scanning Labs | 6 |
-| Wireshark Analysis Labs | 7 |
-| Custom Detection Rules | 1 |
+| Wireshark Analysis Labs | 8 |
+| Custom Detection Rules | 6 |
 
 ---
 
@@ -61,7 +61,8 @@ My cybersecurity home lab is built using **Oracle VirtualBox** and is designed t
 |---------|------|
 | Kali Linux | Attacker Machine |
 | Ubuntu Desktop | Linux Endpoint |
-| Windows 11 | Windows Endpoint |
+| Windows Server 2022 (DC01) | Active Directory Domain Controller |
+| Windows 11 | Domain-Joined Windows Endpoint |
 | Wazuh Server | SIEM & Log Management |
 
 ## Purpose
@@ -84,6 +85,7 @@ My cybersecurity home lab is built using **Oracle VirtualBox** and is designed t
 | 04 | Linux User Account Creation Investigation | Ubuntu Linux | New local user/group creation via `useradd` (MITRE T1136.001) |
 | 05 | Linux Listening Ports Investigation | Ubuntu Linux | Monitoring changes to listening network ports |
 | 06 | Nmap SSH Service Detection Investigation | Ubuntu Linux | Custom Wazuh rule detecting Nmap SSH service scans (MITRE T1595, T1046) |
+| 07 | Kerberoasting Detection Investigation | Windows Server 2022 (Active Directory) | Custom Wazuh rule detecting RC4-encrypted TGS-REQ (Event ID 4769) for service account SPN (MITRE T1558.003) |
 
 Explore all investigations here:
 

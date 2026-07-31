@@ -26,13 +26,16 @@ This repository showcases my hands-on cybersecurity projects and practical SOC A
 
 ## Lab Infrastructure
 
-| Machine          | Role                  | IP Address    |
-| ---------------- | --------------------- | ------------- |
-| Kali Linux       | Attacker Machine      | 192.168.56.20 |
-| Metasploitable 2 | Vulnerable Target     | 192.168.56.10 |
-| Ubuntu Desktop   | Linux Endpoint        | 192.168.56.30 |
-| Windows 11       | Windows Endpoint      | 192.168.56.40 |
-| Wazuh Server     | SIEM & Log Management | 192.168.56.50 |
+| Machine                     | Role                                  | IP Address    |
+| --------------------------- | -------------------------------------- | ------------- |
+| Kali Linux                  | Attacker Machine                       | 192.168.56.20 |
+| Metasploitable 2            | Vulnerable Target                      | 192.168.56.10 |
+| Ubuntu Desktop              | Linux Endpoint                         | 192.168.56.30 |
+| Wazuh Server                | SIEM & Log Management                  | 192.168.56.50 |
+| Windows Server 2022 (DC01)  | Active Directory Domain Controller (corp.local) | 192.168.56.60 |
+| Windows 11 Enterprise       | Domain-Joined Windows Endpoint         | 192.168.56.70 |
+
+All machines run on a dual-adapter configuration (NAT for internet access + Host-Only "labnet" network for isolated lab traffic).
 
 ---
 
@@ -71,6 +74,24 @@ Network communication between lab systems was verified using ICMP ping testing.
 ```bash
 ping 192.168.56.10
 ```
+
+---
+
+---
+
+# 🏢 Active Directory Lab Extension
+
+To support more advanced detection engineering scenarios, the home lab was extended with a Windows Server 2022 domain controller and a domain-joined Windows 11 client.
+
+| Component | Detail |
+|-----------|--------|
+| Domain Controller | Windows Server 2022 (DC01), domain `corp.local` |
+| Domain-Joined Client | Windows 11 Enterprise |
+| Test Account | `Testuser`, used for authentication and Kerberoasting simulations |
+| Service Account | `svc-sql`, SPN `MSSQLSvc/dc01.corp.local:1433` — Kerberoasting target |
+| Endpoint Telemetry | Sysmon deployed on DC01 and the Windows 11 client using Olaf Hartong's sysmon-modular config |
+
+This extension enabled realistic simulation of Active Directory attacks (starting with Kerberoasting) and detection engineering against Event ID 4769 in Wazuh. See [SOC Investigations](../SOC-Investigations/07-Kerberoasting-Detection-Investigation/) for the full writeup.
 
 ---
 
