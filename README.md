@@ -24,6 +24,7 @@
 
 - 🏠 [Home Lab Setup](Home-Lab-Setup/)
 - 🛡️ [SOC Investigations](SOC-Investigations/)
+- 🏢 [Active Directory Labs](Active-Directory-Labs/)
 - 🌐 [Network Scanning](Network-Scanning/)
 - 📡 [Wireshark Traffic Analysis](Wireshark-Traffic-Analysis/)
 
@@ -45,6 +46,7 @@ My objective is to continuously develop practical blue team skills while documen
 |----------|------:|
 | Virtual Home Lab | 1 |
 | SOC Investigations | 7 |
+| Active Directory Labs | 1 |
 | Network Scanning Labs | 6 |
 | Wireshark Analysis Labs | 8 |
 | Custom Detection Rules | 6 |
@@ -90,6 +92,14 @@ My cybersecurity home lab is built using **Oracle VirtualBox** and is designed t
 Explore all investigations here:
 
 ➡️ **[SOC Investigations](SOC-Investigations/)**
+
+---
+
+# 🏢 Active Directory Labs
+
+A dedicated Active Directory environment (Windows Server 2022 domain controller + domain-joined Windows 11 client) built to simulate realistic AD attacks and develop detection engineering skills, starting with Kerberoasting detection against Event ID 4769.
+
+➡️ **[Active Directory Labs](Active-Directory-Labs/)**
 
 ---
 
