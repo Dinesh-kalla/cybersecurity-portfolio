@@ -1,55 +1,59 @@
 # AWS-IR-001 — Failed AWS Console Login
 
-**Status:** Investigated; intent undetermined  
-**Initial severity:** Low (provisional)  
-**Confidence:** Medium in the observed event details; low in any attribution or malicious-intent conclusion  
+**Status:** Closed — benign / false positive based on user confirmation  
+**Severity:** Low  
+**Confidence:** Medium in the recorded event details; user-confirmed attribution, not independently established by CloudTrail  
 **Telemetry:** AWS CloudTrail Event History  
 **Event time:** 2026-09-22 06:06:52 UTC  
 **Region:** ap-south-2 (as observed during lab review)
 
 ## Executive summary
 
-A failed AWS Console sign-in event was observed in CloudTrail. The event was recorded as a failed `ConsoleLogin`, with the error message `No username found in supplied account`. The event details indicated `MFAUsed = No`. This single event is insufficient to establish account compromise or malicious intent.
+CloudTrail recorded a failed AWS Console sign-in (`ConsoleLogin`) at the time shown above. The event's reported error was `No username found in supplied account`, and `MFAUsed = No`. The user subsequently confirmed that the activity was theirs. On that contextual basis, the case is classified as benign / false positive with low severity.
+
+That confirmation is an analyst-provided context statement. The available event details establish a failed sign-in attempt and its recorded fields; they do not independently prove who initiated it. The failure does not establish successful access, MFA bypass, or account compromise.
 
 ## Sanitized evidence
 
 | Field | Observed value |
 |---|---|
-| Event source | `signin.amazonaws.com` (ConsoleLogin event) |
+| Event source | `signin.amazonaws.com` |
 | Event name | `ConsoleLogin` |
 | Result | Failure |
 | Error message | `No username found in supplied account` |
 | MFAUsed | `No` |
-| Source IP | `[REDACTED — retain in private evidence]` |
-| Account / identity identifiers | `[REDACTED]` |
+| Source IP | [REDACTED] |
+| Account, principal, and identity identifiers | [REDACTED] |
 
-The source IP and account identifiers are intentionally not reproduced in this public report. Refer to the original CloudTrail event in the AWS account for the complete record.
+Account IDs, ARNs, usernames, access key IDs, session tokens, and source details that could identify a user, device, or account are omitted from this public report. No raw CloudTrail JSON is published.
 
 ## Timeline
 
-| Time (UTC) | Activity | Interpretation |
+| Time (UTC) | Activity | Evidence / interpretation |
 |---|---|---|
-| 2026-09-22 06:06:52 | CloudTrail recorded a failed ConsoleLogin | Authentication attempt failed; no successful access is established by this event |
+| 2026-09-22 06:06:52 | CloudTrail recorded a failed ConsoleLogin | The event establishes a failed authentication attempt; it does not establish successful access or actor identity. |
+| During follow-up | User confirmed the activity was theirs | User confirmation supports the benign classification but is not an identity claim independently verified by the CloudTrail fields available here. |
 
-## Triage assessment
+## Assessment and disposition
 
-**Classification:** Undetermined / requires correlation. Do not label this a confirmed true positive for malicious activity based on this event alone.
+**Classification:** Benign / false positive, based on user confirmation.  
+**Severity:** Low.
 
-**Why:** The authentication failed, and the supplied account/username was not found. This may result from a mistyped or incorrect sign-in context, but that explanation is only a hypothesis until corroborated. `MFAUsed = No` in a failed login event does not by itself demonstrate MFA bypass or successful access.
+The event failed and contains an error indicating that no username was found in the supplied account. `MFAUsed = No` on this failed event is not evidence of MFA bypass. There is no evidence in the material available for this report that establishes a successful login or account compromise. User confirmation resolves the alert context for this portfolio case, while attribution remains based on that confirmation rather than independent log proof.
 
-**Severity:** Low provisional severity for the isolated failure. Raise severity if correlated events show repeated failures, a subsequent successful login, suspicious API activity, an unfamiliar principal, or other evidence of account misuse.
+## Evidence inventory and limitations
 
-## Follow-up investigation
+- The prior repository investigation note is the written investigation material available for this case.
+- The referenced conversation contains the user's confirmation and request to update the portfolio, but exposes no screenshot or document attachments.
+- No screenshots, source documents, or full CloudTrail export were available in the conversation attachments or task workspace at publication time. See [evidence inventory](../evidence/AWS-IR-001-evidence-inventory.md).
+- The report therefore summarizes only the sanitized event details already recorded in the prior note. It does not claim that surrounding events were reviewed.
+- The source IP and identity fields are redacted; no attribution to a person, device, or network is made from those fields.
 
-1. In CloudTrail Event History, search the surrounding time window for additional `ConsoleLogin` events from the same source IP and any related identity.
-2. Compare failures and successes by time, source IP, user identity, and `responseElements.ConsoleLogin`.
-3. Review nearby management API events for unexpected IAM, access-key, policy, or role changes.
-4. Confirm with the account owner whether the sign-in attempt was expected, using an approved channel.
-5. If unauthorized access is corroborated, follow the organization's incident-response process: preserve evidence, escalate, and have an authorized administrator secure affected credentials and review active sessions.
+## Investigation and response notes
 
-## Detection / investigation query
+The prior investigation used CloudTrail Event History to review the `ConsoleLogin` event. To reproduce or extend the review, filter Event History by **Event name = ConsoleLogin** and the relevant time range, then inspect the event time, source IP, user identity, response, error message, and additional event data. Correlate neighboring authentication and management events before drawing conclusions about access or compromise.
 
-CloudTrail Event History does not provide SQL-style queries; use its filters for **Event name = ConsoleLogin** and the relevant time window. For a trail delivered to CloudWatch Logs Insights, an example query is:
+Example query for a CloudTrail log group in CloudWatch Logs Insights (adapt to the log schema):
 
 ```sql
 fields @timestamp, eventSource, eventName, sourceIPAddress,
@@ -61,15 +65,8 @@ fields @timestamp, eventSource, eventName, sourceIPAddress,
 | limit 100
 ```
 
-Run this only against a CloudTrail log group whose event format includes these fields. Adapt the query if the logs are nested or transformed.
+Do not include unsanitized query output in a public portfolio. If new evidence indicates unauthorized activity, preserve it privately and follow the organization's incident-response process.
 
-## Evidence limitations
+## Closure
 
-- This report is based on the event details captured during the lab review, not a full export of the original event.
-- The surrounding authentication sequence has not yet been correlated in this report.
-- The source IP has not been attributed to a person or threat actor.
-- No evidence currently establishes a successful login or account compromise.
-
-## Closure criteria
-
-Close as benign/expected only if context supports that conclusion and no suspicious correlated activity is found. Otherwise, keep the case open or escalate according to the evidence and organizational procedure.
+Closed as benign / false positive at low severity based on the user's confirmation that the activity was theirs. The classification records that confirmation as context; it does not state that CloudTrail independently verified the user's identity.
