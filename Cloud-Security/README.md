@@ -12,9 +12,9 @@ Hands-on cloud security monitoring and incident investigation using AWS-native t
 
 ## Investigations
 
-| ID | Scenario | Initial assessment | Evidence |
+| ID | Scenario | Assessment | Evidence |
 |---|---|---|---|
-| AWS-IR-001 | Failed AWS Console sign-in | Undetermined; low preliminary severity | [Investigation report](investigations/AWS-IR-001-failed-console-login.md) |
+| AWS-IR-001 | Failed AWS Console sign-in | Benign / false positive based on user confirmation; low severity | [Investigation report](investigations/AWS-IR-001-failed-console-login.md); [evidence inventory](evidence/AWS-IR-001-evidence-inventory.md) |
 
 ## Reproduce the investigation
 
@@ -28,9 +28,10 @@ Hands-on cloud security monitoring and incident investigation using AWS-native t
 
 - Preserve the original event in the private AWS console; publish only a sanitized excerpt.
 - Use UTC timestamps.
-- Separate confirmed observations from analyst hypotheses.
-- Never commit access keys, session tokens, account IDs, or unredacted logs.
+- Separate confirmed observations from analyst hypotheses and user-provided context.
+- Never commit access keys, session tokens, account IDs, ARNs, usernames, device identifiers, or unredacted logs.
 - A single failed login does not prove compromise. Escalate based on corroborating evidence and business context.
+- The AWS-IR-001 conversation attachments did not include screenshots or a separate source document; the [evidence inventory](evidence/AWS-IR-001-evidence-inventory.md) records that limitation.
 
 ## Cost-conscious approach
 
