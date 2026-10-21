@@ -1,12 +1,12 @@
 # AWS Cloud SOC Investigations
 
-Hands-on cloud security monitoring and incident investigation using AWS-native telemetry. This section documents reproducible investigations, event evidence, queries, analyst decisions, and response recommendations.
+Hands-on cloud security monitoring and incident investigation using AWS-native telemetry. This section documents reproducible investigations, sanitized evidence summaries, analyst decisions, and response recommendations.
 
 ## Lab objectives
 
 - Investigate AWS management activity with CloudTrail.
-- Distinguish observed facts from hypotheses.
-- Build UTC timelines and document evidence.
+- Distinguish observed facts from hypotheses and user-provided context.
+- Build UTC timelines and document evidence limitations.
 - Assign defensible classification, severity, and confidence.
 - Practice response recommendations without creating unnecessary cloud resources.
 
@@ -14,24 +14,25 @@ Hands-on cloud security monitoring and incident investigation using AWS-native t
 
 | ID | Scenario | Assessment | Evidence |
 |---|---|---|---|
-| AWS-IR-001 | Failed AWS Console sign-in | Benign / false positive based on user confirmation; low severity | [Investigation report](investigations/AWS-IR-001-failed-console-login.md); [evidence inventory](evidence/AWS-IR-001-evidence-inventory.md) |
+| AWS-IR-001 | Failed AWS Console sign-in and nearby API activity | Benign / false positive based on user confirmation; low severity | [Investigation report](investigations/AWS-IR-001-failed-console-login.md); [evidence inventory](evidence/AWS-IR-001-evidence-inventory.md) |
 
 ## Reproduce the investigation
 
 1. Open **CloudTrail → Event history** in the region where the event occurred.
-2. Filter **Event name** = `ConsoleLogin` and the relevant date range.
-3. Open the event and review `eventTime`, `sourceIPAddress`, `userIdentity`, `responseElements`, `errorMessage`, and `additionalEventData`.
-4. Compare nearby authentication events for the same source and identity. Do not infer malicious intent from one failure alone.
-5. Record findings in the report template and redact account IDs, usernames, and other sensitive details before publishing.
+2. Filter **Event name** = `ConsoleLogin` and select the relevant date/time range.
+3. Inspect `eventTime`, `sourceIPAddress`, `userIdentity`, `responseElements`, `errorMessage`, and MFA-related event data.
+4. Review nearby authentication and management events. Treat matching timestamps and source IPs as correlation, not proof of causation or actor identity.
+5. Confirm whether the activity matches planned work with the account owner/operator.
+6. Record the evidence, limitations, classification, and severity. Redact sensitive details before publishing.
 
 ## Evidence standards
 
-- Preserve the original event in the private AWS console; publish only a sanitized excerpt.
+- Preserve original telemetry privately; publish only sanitized evidence summaries or carefully redacted screenshots.
 - Use UTC timestamps.
-- Separate confirmed observations from analyst hypotheses and user-provided context.
+- Separate log-observed facts from analyst hypotheses and user-provided context.
 - Never commit access keys, session tokens, account IDs, ARNs, usernames, device identifiers, or unredacted logs.
-- A single failed login does not prove compromise. Escalate based on corroborating evidence and business context.
-- The AWS-IR-001 conversation attachments did not include screenshots or a separate source document; the [evidence inventory](evidence/AWS-IR-001-evidence-inventory.md) records that limitation.
+- A failed login alone does not prove compromise. Assess related activity and context before closing or escalating.
+- Screenshots of CloudTrail Event History and browser activity were reviewed in the original chat, but the original image files are not available in the current task workspace. They have not been uploaded or recreated. See the [AWS-IR-001 evidence inventory](evidence/AWS-IR-001-evidence-inventory.md).
 
 ## Cost-conscious approach
 
