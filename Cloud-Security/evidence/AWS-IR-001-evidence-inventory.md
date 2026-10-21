@@ -1,13 +1,17 @@
 # AWS-IR-001 Evidence Inventory
 
-This folder contains only sanitized, reviewable portfolio material.
+This folder contains sanitized portfolio material only. Raw CloudTrail JSON is intentionally excluded.
 
 | Item | Availability | Handling |
 |---|---|---|
-| Prior written investigation note | Available in the repository; updated at [AWS-IR-001 investigation](../investigations/AWS-IR-001-failed-console-login.md) | Sanitized summary only |
-| User confirmation that the activity was theirs | Available in the referenced conversation | Recorded as user-provided context; not independent log attribution |
-| Investigation screenshots | Not available in the conversation attachments or task workspace | Not recreated or represented as evidence |
-| Separate source document or notes file | Not available in the conversation attachments or task workspace | Not fabricated |
-| Full CloudTrail JSON | Not available for publication and intentionally excluded | Do not commit raw events or secrets |
+| Investigation report | Available: [AWS-IR-001 investigation](../investigations/AWS-IR-001-failed-console-login.md) | Sanitized narrative and event timeline |
+| CloudTrail event export used during review | Reviewed during the investigation; original JSON contains sensitive fields and is not published | Only the minimum sanitized fields are summarized in the report |
+| CloudTrail Event History screenshot | Screenshot was shown/reviewed during the original chat, but the original image file is not available in the current task workspace | Not uploaded or recreated |
+| Browser activity screenshot | Screenshot was shown/reviewed during the original chat, but the original image file is not available in the current task workspace | Not uploaded or recreated |
+| User confirmation that the activity was theirs | Available in the conversation | Recorded as user-provided context, not independent log attribution |
+| Separate source document / notes file | No separate attachment is available in the current task workspace | Investigation notes are preserved in the report |
+| Raw CloudTrail JSON | Not published | Do not commit raw events, session credentials, access key IDs, account IDs, or other sensitive fields |
 
-The referenced conversation exposed no file attachments. The original CloudTrail record remains outside this public portfolio. Any later screenshots or documents should be reviewed for account IDs, ARNs, access key IDs, session tokens, usernames, device identifiers, IP addresses, and other identifying details before adding sanitized copies.
+## Publication checklist for later screenshots
+
+Before uploading any original screenshots, review and redact account IDs, ARNs, usernames, source IPs where appropriate, access key IDs, session tokens, request/event identifiers, browser profile details, and other personal or account-identifying information. Do not fabricate replacement screenshots or claim a screenshot is original if it was recreated.
