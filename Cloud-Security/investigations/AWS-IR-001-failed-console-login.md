@@ -2,58 +2,52 @@
 
 **Status:** Closed — benign / false positive based on user confirmation  
 **Severity:** Low  
-**Confidence:** Medium in the recorded event details; user-confirmed attribution, not independently established by CloudTrail  
+**Confidence:** High in the recorded event fields; attribution is based on user confirmation, not independently established by CloudTrail  
 **Telemetry:** AWS CloudTrail Event History  
-**Event time:** 2026-09-22 06:06:52 UTC  
+**Primary event time:** 2026-09-22 06:06:52 UTC  
 **Region:** ap-south-2 (as observed during lab review)
 
 ## Executive summary
 
-CloudTrail recorded a failed AWS Console sign-in (`ConsoleLogin`) at the time shown above. The event's reported error was `No username found in supplied account`, and `MFAUsed = No`. The user subsequently confirmed that the activity was theirs. On that contextual basis, the case is classified as benign / false positive with low severity.
+CloudTrail recorded a failed AWS Console sign-in (`ConsoleLogin`) at the time shown above. The event reported `No username found in supplied account`, with `ConsoleLogin = Failure` and `MFAUsed = No`. During follow-up, the user confirmed the related project activity was theirs. The case is therefore closed as benign / false positive at low severity.
 
-That confirmation is an analyst-provided context statement. The available event details establish a failed sign-in attempt and its recorded fields; they do not independently prove who initiated it. The failure does not establish successful access, MFA bypass, or account compromise.
+The investigation also reviewed nearby CloudTrail activity. A root-identity session was recorded at 06:07:31 UTC, followed by a `DescribeRegions` event at 06:07:35 UTC from the same source IP as the failed login. The root session's context showed MFA authenticated. These are temporal and source-IP correlations, not proof that the failed login caused the root session or that the same person generated both events. The user's confirmation supplies the benign context for this lab disposition.
 
 ## Sanitized evidence
 
-| Field | Observed value |
-|---|---|
-| Event source | `signin.amazonaws.com` |
-| Event name | `ConsoleLogin` |
-| Result | Failure |
-| Error message | `No username found in supplied account` |
-| MFAUsed | `No` |
-| Source IP | [REDACTED] |
-| Account, principal, and identity identifiers | [REDACTED] |
-
-Account IDs, ARNs, usernames, access key IDs, session tokens, and source details that could identify a user, device, or account are omitted from this public report. No raw CloudTrail JSON is published.
-
-## Timeline
-
-| Time (UTC) | Activity | Evidence / interpretation |
+| Time (UTC) | Event | Observed result / interpretation |
 |---|---|---|
-| 2026-09-22 06:06:52 | CloudTrail recorded a failed ConsoleLogin | The event establishes a failed authentication attempt; it does not establish successful access or actor identity. |
-| During follow-up | User confirmed the activity was theirs | User confirmation supports the benign classification but is not an identity claim independently verified by the CloudTrail fields available here. |
+| 2026-09-22 06:06:52 | `ConsoleLogin` | Failure; error: `No username found in supplied account`; `MFAUsed = No` |
+| 2026-09-22 06:07:31 | Root-identity session context | Session creation recorded; MFA context marked authenticated |
+| 2026-09-22 06:07:35 | `DescribeRegions` | Read-only API activity from the same source IP as the failed login |
+| During follow-up | User confirmation | User stated the related activity was theirs |
+
+Source IP, account ID, principal identifiers, usernames, ARNs, access key IDs, session tokens, request IDs, and event IDs are omitted or redacted in this public report. No raw CloudTrail JSON is published.
 
 ## Assessment and disposition
 
-**Classification:** Benign / false positive, based on user confirmation.  
+**Classification:** Benign / false positive based on user confirmation.  
 **Severity:** Low.
 
-The event failed and contains an error indicating that no username was found in the supplied account. `MFAUsed = No` on this failed event is not evidence of MFA bypass. There is no evidence in the material available for this report that establishes a successful login or account compromise. User confirmation resolves the alert context for this portfolio case, while attribution remains based on that confirmation rather than independent log proof.
+The failed sign-in is a real recorded authentication failure, but it does not itself establish successful access, MFA bypass, or compromise. The nearby root-session and API events were correlated by time and source IP; those fields alone cannot establish causal linkage or actor identity. The user confirmed the related project activity was theirs, providing the context used to close this exercise.
 
-## Evidence inventory and limitations
+## Investigation steps
 
-- The prior repository investigation note is the written investigation material available for this case.
-- The referenced conversation contains the user's confirmation and request to update the portfolio, but exposes no screenshot or document attachments.
-- No screenshots, source documents, or full CloudTrail export were available in the conversation attachments or task workspace at publication time. See [evidence inventory](../evidence/AWS-IR-001-evidence-inventory.md).
-- The report therefore summarizes only the sanitized event details already recorded in the prior note. It does not claim that surrounding events were reviewed.
-- The source IP and identity fields are redacted; no attribution to a person, device, or network is made from those fields.
+1. In AWS CloudTrail, open **Event history** in the relevant region and filter by `ConsoleLogin` and the relevant time range.
+2. Inspect `eventTime`, `eventName`, `userIdentity`, `sourceIPAddress`, `responseElements`, `errorMessage`, and MFA-related event data.
+3. Review nearby authentication and management events. Treat same-IP and close-timestamp matches as correlation, not proof of causation.
+4. Ask the account owner/operator to confirm whether the activity matches planned lab work.
+5. Record the classification, severity, evidence limitations, and any remaining follow-up actions.
 
-## Investigation and response notes
+## Screenshots and source material
 
-The prior investigation used CloudTrail Event History to review the `ConsoleLogin` event. To reproduce or extend the review, filter Event History by **Event name = ConsoleLogin** and the relevant time range, then inspect the event time, source IP, user identity, response, error message, and additional event data. Correlate neighboring authentication and management events before drawing conclusions about access or compromise.
+Screenshots of the CloudTrail Event History and browser activity were reviewed during the original chat investigation. The original image files are not available in the current task workspace, so they have not been uploaded to this repository. The evidence inventory records this limitation. No screenshot has been recreated or presented as original evidence.
 
-Example query for a CloudTrail log group in CloudWatch Logs Insights (adapt to the log schema):
+The raw CloudTrail export is intentionally excluded because it contains sensitive account and session fields. If the screenshots are uploaded later, redact account IDs, ARNs, usernames, source IPs where appropriate, access key IDs, session tokens, event/request identifiers, and other identifying details before publication.
+
+## Example CloudWatch Logs Insights query
+
+For a CloudTrail log group with compatible field extraction, adapt this query to the actual schema:
 
 ```sql
 fields @timestamp, eventSource, eventName, sourceIPAddress,
@@ -65,8 +59,8 @@ fields @timestamp, eventSource, eventName, sourceIPAddress,
 | limit 100
 ```
 
-Do not include unsanitized query output in a public portfolio. If new evidence indicates unauthorized activity, preserve it privately and follow the organization's incident-response process.
+Do not publish unsanitized query output. The query is a reproduction aid, not evidence that CloudWatch Logs was used in this investigation.
 
 ## Closure
 
-Closed as benign / false positive at low severity based on the user's confirmation that the activity was theirs. The classification records that confirmation as context; it does not state that CloudTrail independently verified the user's identity.
+Closed as benign / false positive at low severity based on the user's confirmation that the related activity was theirs. CloudTrail established the recorded event fields and nearby API activity; it did not independently verify the user's identity or prove causation between the failed login and the subsequent root-session activity.
